@@ -19,21 +19,29 @@ public class Tail : MonoBehaviour
     {
         edgeCollider.points = new Vector2[] { new Vector2(99999, 99999), new Vector2(99999, 100000) };
 
-        SetPoint();
+        Vector2 headPos = head.position;
+
+        for (int i = 3; i > 0; i--)
+        {
+            Vector2 point = headPos - (Vector2)head.up * spacing * i;
+            SetPoint(point);
+        }
+
+        SetPoint(headPos);
     }
 
     void Update()
     {
-        if (headScript.isAlive && Vector2.Distance(points[points.Count - 1], head.position) > spacing) SetPoint();
+        if (headScript.isAlive && Vector2.Distance(points[points.Count - 1], head.position) > spacing) SetPoint(head.position);
     }
 
-    void SetPoint()
+    void SetPoint(Vector2 pos)
     {
         if(points.Count >= 2) edgeCollider.SetPoints(points);
 
-        points.Add(head.position);
+        points.Add(pos);
 
         lineRenderer.positionCount = points.Count;
-        lineRenderer.SetPosition(points.Count - 1, head.position);
+        lineRenderer.SetPosition(points.Count - 1, pos);
     }
 }
