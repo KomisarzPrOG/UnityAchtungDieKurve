@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Head : MonoBehaviour
 {
-    public string name;
+    public string Name;
     [SerializeField] float movmentSpeed = 1f;
     [SerializeField] float turnSpeed = 180f;
 
@@ -17,7 +17,6 @@ public class Head : MonoBehaviour
 
     void Start()
     {
-        
     }
 
     void Update()
@@ -47,6 +46,7 @@ public class Head : MonoBehaviour
         if (!isAlive) return;
 
         isAlive = false;
-        Debug.Log($"{name} uderzy³ w œciane!");
+        
+        Debug.Log($"{Name} uderzy³ w œciane!");
     }
 }
