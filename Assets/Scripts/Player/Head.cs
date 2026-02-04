@@ -13,10 +13,12 @@ public class Head : MonoBehaviour
 
     float input = 0;
 
-    public bool isAlive { get; private set; } = true;
+    public bool enabledMove = false;
+    public bool isAlive = true;
 
     void Start()
     {
+
     }
 
     void Update()
@@ -28,7 +30,7 @@ public class Head : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(!isAlive) return;
+        if(!isAlive || !enabledMove) return;
         
         transform.Rotate(Vector3.forward * turnSpeed * -input * Time.fixedDeltaTime, Space.Self);
         transform.Translate(Vector3.up * movmentSpeed * Time.fixedDeltaTime, Space.Self);
@@ -43,9 +45,12 @@ public class Head : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!isAlive) return;
+        if (!isAlive && !enabledMove) return;
 
         isAlive = false;
+        enabledMove = false;
+
+        GameManager.Instance.CheckPlayers();
         
         Debug.Log($"{Name} uderzy³ w œciane!");
     }
