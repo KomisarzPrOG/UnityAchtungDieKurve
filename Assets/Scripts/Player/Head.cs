@@ -5,6 +5,7 @@ using UnityEngine;
 public class Head : MonoBehaviour
 {
     public string Name;
+    [SerializeField] public Tail tail;
     [SerializeField] float movmentSpeed = 1f;
     [SerializeField] float turnSpeed = 180f;
 
@@ -13,12 +14,11 @@ public class Head : MonoBehaviour
 
     float input = 0;
 
-    public bool enabledMove = false;
     public bool isAlive = true;
 
     void Start()
     {
-
+        GameManager.Instance.RegisterPlayer(this);
     }
 
     void Update()
@@ -30,7 +30,7 @@ public class Head : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(!isAlive || !enabledMove) return;
+        if(!isAlive) return;
         
         transform.Rotate(Vector3.forward * turnSpeed * -input * Time.fixedDeltaTime, Space.Self);
         transform.Translate(Vector3.up * movmentSpeed * Time.fixedDeltaTime, Space.Self);
@@ -45,10 +45,10 @@ public class Head : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!isAlive && !enabledMove) return;
+        if (!isAlive) return;
 
         isAlive = false;
-        enabledMove = false;
+        gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
 
         GameManager.Instance.CheckPlayers();
         
