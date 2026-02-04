@@ -14,24 +14,17 @@ public class Tail : MonoBehaviour
 
     List<Vector2> points = new List<Vector2>();
 
-
     void Start()
     {
         edgeCollider.points = new Vector2[] { new Vector2(99999, 99999), new Vector2(99999, 100000) };
-
-        Vector2 headPos = head.position;
-
-        for (int i = 3; i > 0; i--)
-        {
-            Vector2 point = headPos - (Vector2)head.up * spacing * i;
-            SetPoint(point);
-        }
-
-        SetPoint(headPos);
     }
 
     void Update()
     {
+        if (GameManager.Instance.state != GameState.Playing) return;
+        if(!headScript.isAlive) return;
+        if(points.Count == 0) return;
+
         if (headScript.isAlive && Vector2.Distance(points[points.Count - 1], head.position) > spacing) SetPoint(head.position);
     }
 
@@ -43,5 +36,27 @@ public class Tail : MonoBehaviour
 
         lineRenderer.positionCount = points.Count;
         lineRenderer.SetPosition(points.Count - 1, pos);
+    }
+
+    public void SetStartingTail()
+    {
+        Vector2 headPos = head.position;
+
+        for (int i = 3; i > 0; i--)
+        {
+            Vector2 point = headPos - (Vector2)head.up * spacing * i;
+            SetPoint(point);
+        }
+
+        SetPoint(headPos);
+    }
+
+    public void ResetTail()
+    {
+        points.Clear();
+
+        lineRenderer.positionCount = 0;
+
+        edgeCollider.points = new Vector2[] { new Vector2(99999, 99999), new Vector2(99999, 100000) };
     }
 }
