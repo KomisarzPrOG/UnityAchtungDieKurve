@@ -7,6 +7,7 @@ public class Head : MonoBehaviour
     public string Name;
     public int id;
     [SerializeField] public Tail tail;
+    [SerializeField] LineRenderer lineRenderer;
     [SerializeField] float movmentSpeed = 1f;
     [SerializeField] float turnSpeed = 180f;
 
@@ -16,9 +17,11 @@ public class Head : MonoBehaviour
     float input = 0;
 
     public bool isAlive = true;
+    public Color playerColor { get; private set; }
 
     void Start()
     {
+        playerColor = lineRenderer.material.color;
         GameManager.Instance.RegisterPlayer(this);
     }
 
