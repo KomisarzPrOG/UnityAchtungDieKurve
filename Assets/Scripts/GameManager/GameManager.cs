@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
 
 
     /* =============================== 
-            GAME STATE MANAGER
+              GAME STATE MANAGER
        ===============================*/
     void StartGame()
     {
@@ -119,12 +119,6 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0;
         state = GameState.GameOver;
-
-        foreach (Head p in players)
-        {
-            if (p.isAlive)
-                Debug.Log($"{p.Name} wygrywa!");
-        }
     }
 
     void RestartGame()
