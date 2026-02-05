@@ -5,6 +5,7 @@ using UnityEngine;
 public class Head : MonoBehaviour
 {
     public string Name;
+    public int id;
     [SerializeField] public Tail tail;
     [SerializeField] float movmentSpeed = 1f;
     [SerializeField] float turnSpeed = 180f;
@@ -51,6 +52,7 @@ public class Head : MonoBehaviour
         gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
 
         GameManager.Instance.CheckPlayers();
+        ScoreHandler.Instance.OnPlayerDeath(id);
         
         Debug.Log($"{Name} uderzy³ w œciane!");
     }
