@@ -25,7 +25,8 @@ public class Tail : MonoBehaviour
         if(!headScript.isAlive) return;
         if(points.Count == 0) return;
 
-        if (headScript.isAlive && Vector2.Distance(points[points.Count - 1], head.position) > spacing) SetPoint(head.position);
+        Vector2 headPos = head.position;
+        if (headScript.isAlive && Vector2.Distance(points[points.Count - 1], headPos) > spacing) SetPoint(headPos);
     }
 
     void SetPoint(Vector2 pos)
