@@ -99,6 +99,7 @@ public class GameManager : MonoBehaviour
         if (players.Count == expectedPlayers)
         {
             SetUpPlayers();
+            ScoreHandler.Instance.SetUpPlayerScores();
             Debug.Log("Wykryto wszystkich graczy!");
         }
     }
@@ -143,5 +144,25 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0;
         }
         paused = !paused;
+    }
+
+    /*==========================
+            HELPER METHODS
+      ===========================*/
+
+    public List<Head> GetAllPlayers()
+    {
+        return players;
+    }
+
+    public Head GetPlayer(int playerId)
+    {
+        foreach(Head p in players)
+        {
+            if(p.id == playerId)
+                return p;
+        }
+
+        return null;
     }
 }
