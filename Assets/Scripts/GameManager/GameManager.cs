@@ -100,6 +100,7 @@ public class GameManager : MonoBehaviour
         {
             SetUpPlayers();
             ScoreHandler.Instance.SetUpPlayerScores();
+            ScoreHandler.Instance.UpdateUI();
             Debug.Log("Wykryto wszystkich graczy!");
         }
     }
