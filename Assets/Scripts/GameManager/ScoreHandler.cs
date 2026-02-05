@@ -52,19 +52,39 @@ public class ScoreHandler : MonoBehaviour
             }
         }
 
-        UpdateUI();
+        SortScores();
+        DebugDump();
     }
 
-    public void UpdateUI()
+    void SortScores()
     {
+        playerScores.Sort((a, b) =>
+        {
+            int scoreCompare = b.score.CompareTo(a.score);
+
+            if(scoreCompare != 0)
+                return scoreCompare;
+
+            return a.playerId.CompareTo(b.playerId);
+        });
+    }
+
+    public void DebugDump()
+    {
+        string output = "==TABELA WYNIKÓW==\n";
+
+        int i = 1;
         foreach (PlayerScore p in playerScores)
         {
             Head player = GameManager.Instance.GetPlayer(p.playerId);
 
             if(player != null)
             {
-                Debug.Log($"Gracz {player.Name}: {p.score} punktów.");
+                output += $"\t{i}. {player.Name}: {p.score} punktów.\n";
+                i++;
             }
         }
+
+        Debug.Log(output);
     }
 }
