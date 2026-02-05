@@ -6,6 +6,11 @@ public class ScoreHandler : MonoBehaviour
 {
     public static ScoreHandler Instance;
 
+    [SerializeField] Transform scoreBoardParent;
+    [SerializeField] GameObject scoreEntryPrefab;
+
+    List<GameObject> spawnedEntries = new List<GameObject>();
+
     public class PlayerScore
     {
         public int playerId;
@@ -53,6 +58,7 @@ public class ScoreHandler : MonoBehaviour
         }
 
         SortScores();
+        UpdateUI();
         DebugDump();
     }
 
@@ -67,6 +73,29 @@ public class ScoreHandler : MonoBehaviour
 
             return a.playerId.CompareTo(b.playerId);
         });
+    }
+
+    public void UpdateUI()
+    {
+        foreach(var entry in spawnedEntries)
+            Destroy(entry);
+
+        spawnedEntries.Clear();
+
+        for(int i = 0; i < playerScores.Count; i++)
+        {
+            PlayerScore p = playerScores[i];
+            Head head = GameManager.Instance.GetPlayer(p.playerId);
+
+            if(head == null) continue;
+
+            GameObject entryObject = Instantiate(scoreEntryPrefab, GameObject.Find("Content").transform);
+            ScoreEntryUI entryUI = entryObject.GetComponent<ScoreEntryUI>();
+
+            entryUI.Set(head.Name, p.score, head.playerColor);
+
+            spawnedEntries.Add(entryObject);
+        }
     }
 
     public void DebugDump()
