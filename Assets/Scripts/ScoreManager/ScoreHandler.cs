@@ -54,7 +54,7 @@ public class ScoreHandler : MonoBehaviour
 
     void UpdateScoreTarget()
     {
-        pointsTarget = 10 * (playerScores.Count - 1);
+        pointsTarget = 10 * (playerScores.Count - 1) / 5;
         TMP_Text display = GameObject.Find("PointTarget").GetComponent<TMP_Text>();
 
         display.text = pointsTarget.ToString();
@@ -131,6 +131,11 @@ public class ScoreHandler : MonoBehaviour
             return true;
         
         return false;
+    }
+
+    public void ClearScores()
+    {
+        playerScores.Clear();
     }
 
 

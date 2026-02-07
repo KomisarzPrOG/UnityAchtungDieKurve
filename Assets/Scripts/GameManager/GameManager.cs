@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour
                 case GameState.RoundOver:
                     RestartGame(); break;
                 case GameState.GameOver:
+                    ScoreHandler.Instance.ClearScores();
                     SceneHandler.Instance.NextScene(); break;
             }
         }
