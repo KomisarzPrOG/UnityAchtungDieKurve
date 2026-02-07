@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -49,6 +50,8 @@ public class GameManager : MonoBehaviour
                     PauseGame(); break;
                 case GameState.RoundOver:
                     RestartGame(); break;
+                case GameState.GameOver:
+                    SceneHandler.Instance.NextScene(); break;
             }
         }
     }
