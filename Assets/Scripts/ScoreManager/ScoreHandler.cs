@@ -7,7 +7,6 @@ public class ScoreHandler : MonoBehaviour
 {
     public static ScoreHandler Instance;
 
-    [SerializeField] Transform scoreBoardParent;
     [SerializeField] GameObject scoreEntryPrefab;
 
     List<GameObject> spawnedEntries = new List<GameObject>();
