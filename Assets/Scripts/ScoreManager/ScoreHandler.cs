@@ -54,7 +54,7 @@ public class ScoreHandler : MonoBehaviour
 
     void UpdateScoreTarget()
     {
-        pointsTarget = 10 * (playerScores.Count - 1) / 5;
+        pointsTarget = 10 * (playerScores.Count - 1);
         TMP_Text display = GameObject.Find("PointTarget").GetComponent<TMP_Text>();
 
         display.text = pointsTarget.ToString();
@@ -115,22 +115,27 @@ public class ScoreHandler : MonoBehaviour
 
     public bool DidPlayerWin(int playerId)
     {
+        int maxScore = int.MinValue;
+        int secondMaxScore = int.MinValue;
+        int winingPlayerId = -1;
 
-        int maxScore = 0, previousScore = 0, winingPlayerId = 0;
-        foreach(PlayerScore player in playerScores)
+        foreach (PlayerScore player in playerScores)
         {
-            if(player.score > maxScore)
+            if (player.score > maxScore)
             {
-                previousScore = maxScore;
+                secondMaxScore = maxScore;
                 maxScore = player.score;
                 winingPlayerId = player.playerId;
             }
+            else if (player.score > secondMaxScore)
+                secondMaxScore = player.score;
         }
 
-        if(maxScore >= pointsTarget && maxScore -  previousScore > 2 && winingPlayerId == playerId)
-            return true;
-        
-        return false;
+        bool reachedTarget = maxScore >= pointsTarget;
+        bool enoughLead = maxScore - secondMaxScore >= 2;
+        bool isWinner = winingPlayerId == playerId;
+
+        return reachedTarget && enoughLead && isWinner;
     }
 
     public void ClearScores()
