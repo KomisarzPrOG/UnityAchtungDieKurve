@@ -22,6 +22,9 @@ public class PlayerSelectManager : MonoBehaviour
         KeyCode.RightAlt,
         KeyCode.LeftControl,
         KeyCode.RightControl,
+        KeyCode.CapsLock,
+        KeyCode.Numlock,
+        KeyCode.ScrollLock,
 
         KeyCode.Mouse0,
         KeyCode.Mouse1,
@@ -104,9 +107,9 @@ public class PlayerSelectManager : MonoBehaviour
 
     void ChangeText(string control, PlayerConfig player)
     {
-        if(control == "Left")
-            player.leftKeyText.text = player.leftKey.ToString();
+        if (control == "Left")
+            player.leftKeyText.text = KeyNameUtility.ToPretty(player.leftKey);
         else
-            player.rightKeyText.text = player.rightKey.ToString();
+            player.rightKeyText.text = KeyNameUtility.ToPretty(player.rightKey);
     }
 }
