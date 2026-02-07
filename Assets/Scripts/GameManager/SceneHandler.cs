@@ -28,6 +28,9 @@ public class SceneHandler : MonoBehaviour
     public void NextScene()
     {
         int currentIndex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(++currentIndex);
+        int sceneCount = SceneManager.sceneCountInBuildSettings;
+
+        int nextIndex = (currentIndex + 1) % sceneCount;
+        SceneManager.LoadScene(nextIndex);
     }
 }
