@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ScoreHandler : MonoBehaviour
@@ -10,6 +11,8 @@ public class ScoreHandler : MonoBehaviour
     [SerializeField] GameObject scoreEntryPrefab;
 
     List<GameObject> spawnedEntries = new List<GameObject>();
+
+    int pointsTarget = 0;
 
     public class PlayerScore
     {
@@ -33,7 +36,11 @@ public class ScoreHandler : MonoBehaviour
 
     public void SetUpPlayerScores()
     {
-        if(playerScores.Count > 0) return;
+        if(playerScores.Count > 0)
+        {
+            UpdateScoreTarget();
+            return;
+        }
 
         List<Head> players = new List<Head>();
         players = GameManager.Instance.GetAllPlayers();
@@ -42,6 +49,16 @@ public class ScoreHandler : MonoBehaviour
         {
             playerScores.Add(new PlayerScore { playerId = head.id, score = 0 });
         }
+
+        UpdateScoreTarget();
+    }
+
+    void UpdateScoreTarget()
+    {
+        pointsTarget = 10 * (playerScores.Count - 1);
+        TMP_Text display = GameObject.Find("PointTarget").GetComponent<TMP_Text>();
+
+        display.text = pointsTarget.ToString();
     }
 
     public void OnPlayerDeath(int deadPlayerId)
@@ -59,7 +76,6 @@ public class ScoreHandler : MonoBehaviour
 
         SortScores();
         UpdateUI();
-        DebugDump();
     }
 
     void SortScores()
@@ -98,6 +114,30 @@ public class ScoreHandler : MonoBehaviour
         }
     }
 
+    public bool DidPlayerWin(int playerId)
+    {
+
+        int maxScore = 0, previousScore = 0, winingPlayerId = 0;
+        foreach(PlayerScore player in playerScores)
+        {
+            if(player.score > maxScore)
+            {
+                previousScore = maxScore;
+                maxScore = player.score;
+                winingPlayerId = player.playerId;
+            }
+        }
+
+        if(maxScore >= pointsTarget && maxScore -  previousScore > 2 && winingPlayerId == playerId)
+            return true;
+        
+        return false;
+    }
+
+
+    /* ============
+           DEBUG
+        ===========*/
     public void DebugDump()
     {
         string output = "==TABELA WYNIKÓW==\n";

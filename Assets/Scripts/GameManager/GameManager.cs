@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 
@@ -12,6 +13,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] int expectedPlayers;
     [SerializeField] Vector2 minBounds;
     [SerializeField] Vector2 maxBounds;
+
+    [SerializeField] GameObject winWindowPrefab;
 
     List<Head> players = new List<Head>();
     bool paused = false;
@@ -44,7 +47,7 @@ public class GameManager : MonoBehaviour
                     StartGame(); break;
                 case GameState.Playing:
                     PauseGame(); break;
-                case GameState.GameOver:
+                case GameState.RoundOver:
                     RestartGame(); break;
             }
         }
@@ -119,7 +122,16 @@ public class GameManager : MonoBehaviour
     void EndRound()
     {
         Time.timeScale = 0;
-        state = GameState.GameOver;
+        state = GameState.RoundOver;
+
+        foreach(Head p in players)
+        {
+            if (ScoreHandler.Instance.DidPlayerWin(p.id))
+            {
+                PlayerWon(p);
+                break;
+            }
+        }
     }
 
     void RestartGame()
@@ -139,6 +151,17 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0;
         }
         paused = !paused;
+    }
+
+    void PlayerWon(Head player)
+    {
+        state = GameState.GameOver;
+        Debug.Log($"{player.Name} wygrywa!");
+
+        GameObject winWindowObj = Instantiate(winWindowPrefab, GameObject.Find("WinScreen").transform);
+        WinWindowHandler winWindowAccess = winWindowObj.GetComponent<WinWindowHandler>();
+
+        winWindowAccess.SetWindow(player.playerColor, player.Name);
     }
 
     /*==========================
