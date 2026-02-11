@@ -75,6 +75,9 @@ public class ScoreHandler : MonoBehaviour
 
         SortScores();
         UpdateUI();
+
+        if(GameManager.Instance.CheckPlayers() <= 1)
+            GameManager.Instance.EndRound();
     }
 
     void SortScores()

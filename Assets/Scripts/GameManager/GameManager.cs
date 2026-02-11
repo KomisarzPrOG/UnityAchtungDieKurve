@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void CheckPlayers()
+    public int CheckPlayers()
     {
         int alivePlayers = 0;
 
@@ -91,8 +91,7 @@ public class GameManager : MonoBehaviour
             if (p.isAlive)
                 alivePlayers++;
 
-        if (alivePlayers <= 1)
-            EndRound();
+        return alivePlayers;
     }
 
     public void RegisterPlayer(Head p)
@@ -123,7 +122,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    void EndRound()
+    public void EndRound()
     {
         Time.timeScale = 0;
         state = GameState.RoundOver;
