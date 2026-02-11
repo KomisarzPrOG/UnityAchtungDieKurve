@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerMenuItem : MonoBehaviour
 {
     public TMP_Text[] texts;
+    public Material material;
     public int playerID;
 
     bool selected = false;
@@ -39,7 +40,7 @@ public class PlayerMenuItem : MonoBehaviour
         }
         else
         {
-            PlayerSelectManager.Instance.SelectPlayer(playerID, texts[1].ToString(), texts[1].color, texts[2], texts[3]);
+            PlayerSelectManager.Instance.SelectPlayer(playerID, texts[1].text.ToString(), material, texts[2], texts[3]);
             SetAlpha(255);
         }
 

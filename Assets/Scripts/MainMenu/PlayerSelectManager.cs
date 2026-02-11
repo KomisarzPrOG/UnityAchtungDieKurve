@@ -46,9 +46,9 @@ public class PlayerSelectManager : MonoBehaviour
         Instance = this;
     }
 
-    public void SelectPlayer(int id, string name, Color color, TMP_Text left, TMP_Text right)
+    public void SelectPlayer(int id, string name, Material material, TMP_Text left, TMP_Text right)
     {
-        selectedPlayers.Add(new PlayerConfig(id, name, color, left, right));
+        selectedPlayers.Add(new PlayerConfig(id, name, material, left, right));
         if(selectedPlayers.Count > 0)
             waitingForLeftKey = true;
     }

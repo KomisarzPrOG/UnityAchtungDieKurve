@@ -8,7 +8,7 @@ public class PlayerConfig
 {
     public int playerID;
     public string playerName;
-    public Color playerColor;
+    public Material playerMaterial;
 
     public KeyCode leftKey;
     public KeyCode rightKey;
@@ -16,11 +16,11 @@ public class PlayerConfig
     public TMP_Text leftKeyText;
     public TMP_Text rightKeyText;
 
-    public PlayerConfig(int id, string name, Color color, TMP_Text left, TMP_Text right)
+    public PlayerConfig(int id, string name, Material material, TMP_Text left, TMP_Text right)
     {
         playerID = id;
         playerName = name;
-        playerColor = color;
+        playerMaterial = material;
         leftKeyText = left;
         rightKeyText = right;
     }
