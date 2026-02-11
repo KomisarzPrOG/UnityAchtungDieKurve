@@ -19,15 +19,17 @@ public class SceneHandler : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    public int SceneIndex() { return SceneManager.GetActiveScene().buildIndex; }
+
     // by PrzemekBarczyk
     public void RestartScene()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(SceneIndex());
     }
 
     public void NextScene()
     {
-        int currentIndex = SceneManager.GetActiveScene().buildIndex;
+        int currentIndex = SceneIndex();
         int sceneCount = SceneManager.sceneCountInBuildSettings;
 
         int nextIndex = (currentIndex + 1) % sceneCount;
