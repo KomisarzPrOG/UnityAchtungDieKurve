@@ -60,4 +60,9 @@ public class Tail : MonoBehaviour
 
         edgeCollider.points = new Vector2[] { new Vector2(99999, 99999), new Vector2(99999, 100000) };
     }
+
+    public void SetTail(Material material)
+    {
+        lineRenderer.material = material;
+    }
 }

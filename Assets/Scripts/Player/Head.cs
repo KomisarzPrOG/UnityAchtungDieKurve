@@ -59,4 +59,13 @@ public class Head : MonoBehaviour
         
         Debug.Log($"{Name} uderzy³ w œciane!");
     }
+
+    public void SetHead(string name, int newId, KeyCode leftKey, KeyCode rightKey, Color color)
+    {
+        Name = name;
+        id = newId;
+        LeftKey = leftKey;
+        RightKey = rightKey;
+        playerColor = color;
+    }
 }
