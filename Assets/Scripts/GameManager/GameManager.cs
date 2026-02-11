@@ -20,6 +20,10 @@ public class GameManager : MonoBehaviour
     List<Head> players = new List<Head>();
     bool paused = false;
 
+    float escapeHoldTime = 0;
+    [SerializeField] float escapeRequiredTime = 3f;
+    TMP_Text escapeText;
+
     private void Awake()
     {
         if(Instance != null)
@@ -40,6 +44,8 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        if (SceneHandler.Instance.SceneIndex() == 0) return;
+
         if(Input.GetKeyDown(KeyCode.Space))
         {
             switch(state)
@@ -54,6 +60,41 @@ public class GameManager : MonoBehaviour
                     ScoreHandler.Instance.ClearScores();
                     SceneHandler.Instance.NextScene(); break;
             }
+        }
+
+        if(escapeText == null)
+            escapeText = GameObject.Find("EscapeText").GetComponent<TMP_Text>();
+
+        HandleEscapeHold();
+    }
+
+    void HandleEscapeHold()
+    {
+        if(Input.GetKey(KeyCode.Escape))
+        {
+            escapeHoldTime += Time.unscaledDeltaTime;
+
+            if(escapeHoldTime >= escapeRequiredTime)
+            {
+                ScoreHandler.Instance.ClearScores();
+                SceneHandler.Instance.NextScene();
+            }
+
+            float progress = escapeHoldTime / escapeRequiredTime;
+
+            if (progress >= 0.75f)
+                escapeText.text = "Returning to Menu...";
+            else if (progress >= 0.5f)
+                escapeText.text = "Returning to Menu..";
+            else if (progress >= 0.25f)
+                escapeText.text = "Returning to Menu.";
+            else
+                escapeText.text = "Returning to Menu";
+        }
+        else
+        {
+            escapeHoldTime = 0;
+            escapeText.text = "";
         }
     }
 
