@@ -8,7 +8,7 @@ public class Head : MonoBehaviour
     public int id;
     [SerializeField] public Tail tail;
     [SerializeField] LineRenderer lineRenderer;
-    [SerializeField] float movmentSpeed = 1f;
+    [SerializeField] float baseSpeed = 1f;
     [SerializeField] float turnSpeed = 180f;
 
     public KeyCode LeftKey;
@@ -18,6 +18,20 @@ public class Head : MonoBehaviour
 
     public bool isAlive = true;
     public Color playerColor { get; private set; }
+
+    private List<float> speedModifiers = new List<float>();
+    float currentSpeed
+    {
+        get
+        {
+            float speed = baseSpeed;
+
+            foreach(float modifier in speedModifiers)
+                speed *= modifier;
+
+            return speed;
+        }
+    }
 
     void Start()
     {
@@ -37,7 +51,7 @@ public class Head : MonoBehaviour
         if(!isAlive) return;
         
         transform.Rotate(Vector3.forward * turnSpeed * -input * Time.fixedDeltaTime, Space.Self);
-        transform.Translate(Vector3.up * movmentSpeed * Time.fixedDeltaTime, Space.Self);
+        transform.Translate(Vector3.up * currentSpeed * Time.fixedDeltaTime, Space.Self);
     }
 
     float getInput()
@@ -50,6 +64,14 @@ public class Head : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (!isAlive) return;
+
+        PowerUp powerUp = collision.GetComponent<PowerUp>();
+        if (powerUp != null)
+        {
+            powerUp.Activate(this);
+            Destroy(powerUp.gameObject);
+            return;
+        }
 
         isAlive = false;
         gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
@@ -67,5 +89,16 @@ public class Head : MonoBehaviour
         LeftKey = leftKey;
         RightKey = rightKey;
         playerColor = color;
+    }
+
+    /* ====================
+          POWERUP METHODS
+       ==================== */
+
+    public IEnumerator ModifySpeed(float multiplier, float duration)
+    {
+        speedModifiers.Add(multiplier);
+        yield return new WaitForSeconds(duration);
+        speedModifiers.Remove(multiplier);
     }
 }
