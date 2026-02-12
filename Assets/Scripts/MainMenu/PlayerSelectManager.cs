@@ -12,6 +12,8 @@ public class PlayerSelectManager : MonoBehaviour
     bool waitingForLeftKey = false;
     bool waitingForRightKey = false;
 
+    public float ignoreInputUntill = 0f;
+
     HashSet<KeyCode> forbiddenKeys = new()
     {
         KeyCode.Escape,
@@ -53,8 +55,28 @@ public class PlayerSelectManager : MonoBehaviour
             waitingForLeftKey = true;
     }
 
+    public void DeselectPlayer(int id)
+    {
+        int index = selectedPlayers.FindIndex(p => p.playerID == id);
+        if (index == -1) return;
+
+        selectedPlayers.RemoveAt(index);
+
+        if (currentPlayer >= selectedPlayers.Count)
+        {
+            currentPlayer = selectedPlayers.Count;
+            waitingForLeftKey = false;
+            waitingForRightKey = false;
+        }
+
+        if (selectedPlayers.Count > 0 && currentPlayer < selectedPlayers.Count)
+            waitingForLeftKey = true;
+    }
+
     private void Update()
     {
+        if(Time.time < ignoreInputUntill) return;
+
         if (waitingForLeftKey || waitingForRightKey)
             DetectKey();
 
@@ -64,6 +86,8 @@ public class PlayerSelectManager : MonoBehaviour
 
     void DetectKey()
     {
+        if (Time.time < ignoreInputUntill) return;
+
         foreach(KeyCode key in System.Enum.GetValues(typeof(KeyCode)))
         {
             if(!Input.GetKeyDown(key)) continue;
@@ -95,6 +119,8 @@ public class PlayerSelectManager : MonoBehaviour
                 currentPlayer++;
                 if(currentPlayer < selectedPlayers.Count)
                     waitingForLeftKey = true;
+
+                IgnoreInputFor(0.35f);
             }
         }
     }
@@ -111,5 +137,15 @@ public class PlayerSelectManager : MonoBehaviour
             player.leftKeyText.text = KeyNameUtility.ToPretty(player.leftKey);
         else
             player.rightKeyText.text = KeyNameUtility.ToPretty(player.rightKey);
+    }
+
+    public bool IsWaitingForInput()
+    {
+        return waitingForLeftKey || waitingForRightKey;
+    }
+
+    public void IgnoreInputFor(float time)
+    {
+        ignoreInputUntill = Time.time + time;
     }
 }
