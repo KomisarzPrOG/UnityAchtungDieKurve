@@ -23,9 +23,15 @@ public class Tail : MonoBehaviour
     {
         if (GameManager.Instance.state != GameState.Playing) return;
         if(!headScript.isAlive) return;
-        if(points.Count == 0) return;
-
+        
         Vector2 headPos = head.position;
+        
+        if(points.Count == 0)
+        {
+            SetPoint(headPos);
+            return;
+        }
+
         if (headScript.isAlive && Vector2.Distance(points[points.Count - 1], headPos) > spacing) SetPoint(headPos);
     }
 
