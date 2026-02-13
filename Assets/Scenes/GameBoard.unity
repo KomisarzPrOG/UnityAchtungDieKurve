@@ -1545,6 +1545,8 @@ MonoBehaviour:
   powerUpPrefabs:
   - {fileID: 8532384477650473156, guid: 13802462715da484e85ca8406e652335, type: 3}
   - {fileID: 8342649655938575634, guid: 1c8440c4b8396e74098b00df0ecac7e8, type: 3}
+  - {fileID: 6582089866692654689, guid: 0348ba472262d1a4fb767550aed86789, type: 3}
+  - {fileID: 2195800503492046517, guid: 0fcaa9da7a939104e8e35a78a14aff8f, type: 3}
   minBounds: {x: -6.18, y: -4.6}
   maxBounds: {x: 2.95, y: 4.6}
   spawnInterval: 2.5
