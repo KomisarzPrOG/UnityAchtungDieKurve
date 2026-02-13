@@ -6,13 +6,17 @@ public class Head : MonoBehaviour
 {
     public string Name;
     public int id;
-    [SerializeField] public Tail tail;
+    public Tail tail;
     [SerializeField] LineRenderer lineRenderer;
     [SerializeField] float baseSpeed = 1f;
     [SerializeField] float turnSpeed = 180f;
 
     public KeyCode LeftKey;
     public KeyCode RightKey;
+
+    private int reverseEffectCount = 0;
+    private KeyCode originalLeftKey;
+    private KeyCode originalRightKey;
 
     float input = 0;
 
@@ -31,6 +35,12 @@ public class Head : MonoBehaviour
 
             return speed;
         }
+    }
+
+    void Awake()
+    {
+        originalLeftKey = LeftKey;
+        originalRightKey = RightKey;
     }
 
     void Start()
@@ -100,5 +110,29 @@ public class Head : MonoBehaviour
         speedModifiers.Add(multiplier);
         yield return new WaitForSeconds(duration);
         speedModifiers.Remove(multiplier);
+    }
+
+    public IEnumerator ReverseKeyBinds(float duration)
+    {
+        SpriteRenderer sr = gameObject.GetComponent<SpriteRenderer>();
+        reverseEffectCount++;
+
+        if(reverseEffectCount == 1)
+        {
+            LeftKey = originalRightKey;
+            RightKey = originalLeftKey;
+            sr.color = Color.blue;
+        }
+
+        yield return new WaitForSeconds(duration);
+
+        reverseEffectCount--;
+
+        if(reverseEffectCount == 0)
+        {
+            LeftKey = originalLeftKey;
+            RightKey = originalRightKey;
+            sr.color = Color.yellow;
+        }
     }
 }
