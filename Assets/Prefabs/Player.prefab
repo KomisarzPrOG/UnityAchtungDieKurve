@@ -104,7 +104,7 @@ MonoBehaviour:
   id: 0
   tail: {fileID: 4044280566860367178}
   lineRenderer: {fileID: 3934090460298076401}
-  movmentSpeed: 1.5
+  baseSpeed: 1.5
   turnSpeed: 180
   LeftKey: 276
   RightKey: 275
