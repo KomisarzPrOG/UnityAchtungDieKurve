@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
         }
 
         Instance = this;
+        expectedPlayers = PlayerPrefsData.players.Count;
         DontDestroyOnLoad(gameObject);
     }
 
@@ -119,7 +120,6 @@ public class GameManager : MonoBehaviour
 
             p.isAlive = true;
 
-            p.tail.ResetTail();
             p.tail.SetStartingTail();
         }
     }
