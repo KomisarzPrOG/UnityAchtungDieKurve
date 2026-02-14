@@ -307,7 +307,7 @@ GameObject:
   - component: {fileID: 283508139}
   m_Layer: 0
   m_Name: RightBorder
-  m_TagString: Untagged
+  m_TagString: Border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -530,7 +530,7 @@ GameObject:
   - component: {fileID: 808877205}
   m_Layer: 0
   m_Name: TopBorder
-  m_TagString: Untagged
+  m_TagString: Border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -874,7 +874,7 @@ GameObject:
   - component: {fileID: 1097194526}
   m_Layer: 0
   m_Name: LeftBorder
-  m_TagString: Untagged
+  m_TagString: Border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1497,7 +1497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ce20aa7a61fcaf4e82d967de0b6b444, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 8602933745451133906, guid: 33331822876a5924b93d40a8ec7c3de8, type: 3}
+  playerPrefab: {fileID: 2697046615856293939, guid: a2facfe292712164ab904357baad2820, type: 3}
 --- !u!4 &1648723503
 Transform:
   m_ObjectHideFlags: 0
@@ -1547,10 +1547,11 @@ MonoBehaviour:
   - {fileID: 8342649655938575634, guid: 1c8440c4b8396e74098b00df0ecac7e8, type: 3}
   - {fileID: 6582089866692654689, guid: 0348ba472262d1a4fb767550aed86789, type: 3}
   - {fileID: 2195800503492046517, guid: 0fcaa9da7a939104e8e35a78a14aff8f, type: 3}
+  - {fileID: 2399155254777587481, guid: 20d26b9f2178c4e489424bee3afa8001, type: 3}
   minBounds: {x: -6.18, y: -4.6}
   maxBounds: {x: 2.95, y: 4.6}
   spawnInterval: 2.5
-  spawnChance: 50
+  spawnChance: 100
 --- !u!4 &1846271014
 Transform:
   m_ObjectHideFlags: 0
@@ -1579,7 +1580,7 @@ GameObject:
   - component: {fileID: 1967382965}
   m_Layer: 0
   m_Name: BottomBorder
-  m_TagString: Untagged
+  m_TagString: Border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
