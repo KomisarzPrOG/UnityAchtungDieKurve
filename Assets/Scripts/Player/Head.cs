@@ -46,8 +46,6 @@ public class Head : MonoBehaviour
 
     void Awake()
     {
-        originalLeftKey = LeftKey;
-        originalRightKey = RightKey;
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
@@ -109,6 +107,9 @@ public class Head : MonoBehaviour
         LeftKey = leftKey;
         RightKey = rightKey;
         playerColor = color;
+
+        originalLeftKey = leftKey;
+        originalRightKey = rightKey;
     }
 
     /* ====================
@@ -150,10 +151,7 @@ public class Head : MonoBehaviour
         phaseWalkCount++;
 
         if(phaseWalkCount == 1)
-        {
             phaseWalk = true;
-            blinkRoutine = StartCoroutine(PhaseBlink());
-        }
 
         yield return new WaitForSeconds(duration);
 
@@ -164,11 +162,6 @@ public class Head : MonoBehaviour
             tail.StartNewSegment();
 
             phaseWalk = false;
-
-            if(blinkRoutine != null)
-                StopCoroutine(blinkRoutine);
-
-            SetAlpha(1f);
         }
     }
 
