@@ -252,5 +252,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   possibleTargets: 0000000001000000
   Border: {fileID: 1806345823003683142}
-  speedMultiplier: 2
+  speedMultiplier: 1.25
   duration: 5
