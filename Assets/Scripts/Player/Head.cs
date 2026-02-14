@@ -7,7 +7,6 @@ public class Head : MonoBehaviour
     public string Name;
     public int id;
     public Tail tail;
-    [SerializeField] LineRenderer lineRenderer;
     [SerializeField] float baseSpeed = 1f;
     [SerializeField] float turnSpeed = 180f;
 
@@ -21,7 +20,7 @@ public class Head : MonoBehaviour
     float input = 0;
 
     public bool isAlive = true;
-    public Color playerColor { get; private set; }
+    public Color playerColor;
 
     private List<float> speedModifiers = new List<float>();
     float currentSpeed
@@ -30,22 +29,30 @@ public class Head : MonoBehaviour
         {
             float speed = baseSpeed;
 
-            foreach(float modifier in speedModifiers)
+            foreach (float modifier in speedModifiers)
                 speed *= modifier;
 
             return speed;
         }
     }
 
+    [SerializeField] float blinkSpeed = 2f;
+
+    private SpriteRenderer spriteRenderer;
+    private Coroutine blinkRoutine;
+
+    public bool phaseWalk { get; private set; } = false;
+    int phaseWalkCount = 0;
+
     void Awake()
     {
         originalLeftKey = LeftKey;
         originalRightKey = RightKey;
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Start()
     {
-        playerColor = lineRenderer.material.color;
         GameManager.Instance.RegisterPlayer(this);
     }
 
@@ -83,6 +90,9 @@ public class Head : MonoBehaviour
             return;
         }
 
+        if (phaseWalk && collision.CompareTag("Tail"))
+            return;
+
         isAlive = false;
         gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
 
@@ -114,14 +124,13 @@ public class Head : MonoBehaviour
 
     public IEnumerator ReverseKeyBinds(float duration)
     {
-        SpriteRenderer sr = gameObject.GetComponent<SpriteRenderer>();
         reverseEffectCount++;
 
         if(reverseEffectCount == 1)
         {
             LeftKey = originalRightKey;
             RightKey = originalLeftKey;
-            sr.color = Color.blue;
+            spriteRenderer.color = Color.blue;
         }
 
         yield return new WaitForSeconds(duration);
@@ -132,7 +141,54 @@ public class Head : MonoBehaviour
         {
             LeftKey = originalLeftKey;
             RightKey = originalRightKey;
-            sr.color = Color.yellow;
+            spriteRenderer.color = Color.yellow;
         }
+    }
+
+    public IEnumerator ActivatePhaseWalk(float duration)
+    {
+        phaseWalkCount++;
+
+        if(phaseWalkCount == 1)
+        {
+            phaseWalk = true;
+            blinkRoutine = StartCoroutine(PhaseBlink());
+        }
+
+        yield return new WaitForSeconds(duration);
+
+        phaseWalkCount--;
+
+        if(phaseWalkCount == 0)
+        {
+            tail.StartNewSegment();
+
+            phaseWalk = false;
+
+            if(blinkRoutine != null)
+                StopCoroutine(blinkRoutine);
+
+            SetAlpha(1f);
+        }
+    }
+
+    private IEnumerator PhaseBlink()
+    {
+        while (true)
+        {
+            float alpha = Mathf.Lerp(0.2f, 1f,
+                Mathf.PingPong(Time.time * blinkSpeed, 1f));
+
+            SetAlpha(alpha);
+
+            yield return null;
+        }
+    }
+
+    private void SetAlpha(float alpha)
+    {
+        Color c = spriteRenderer.color;
+        c.a = alpha;
+        spriteRenderer.color = c;
     }
 }

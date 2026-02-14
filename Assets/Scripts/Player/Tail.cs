@@ -1,74 +1,110 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Tail : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField] Head headScript;
     [SerializeField] Transform head;
+    [SerializeField] GameObject tailSegmentPrefab;
+
+    [Header("Settings")]
     [SerializeField] float spacing = 0.1f;
 
-    [SerializeField] LineRenderer lineRenderer;
-    [SerializeField] EdgeCollider2D edgeCollider;
+    private Material tailMaterial;
 
-    List<Vector2> points = new List<Vector2>();
+    private LineRenderer currentLine;
+    private EdgeCollider2D currentCollider;
 
-    void Start()
-    {
-        edgeCollider.points = new Vector2[] { new Vector2(99999, 99999), new Vector2(99999, 100000) };
-    }
+    private List<Vector2> points = new List<Vector2>();
+
 
     void Update()
     {
         if (GameManager.Instance.state != GameState.Playing) return;
-        if(!headScript.isAlive) return;
-        
+        if (!headScript.isAlive) return;
+        if (headScript.phaseWalk) return;
+
         Vector2 headPos = head.position;
-        
-        if(points.Count == 0)
+
+        if (points.Count == 0)
         {
-            SetPoint(headPos);
+            AddPoint(headPos);
             return;
         }
 
-        if (headScript.isAlive && Vector2.Distance(points[points.Count - 1], headPos) > spacing) SetPoint(headPos);
+        if (Vector2.Distance(points[points.Count - 1], headPos) > spacing)
+            AddPoint(headPos);
     }
 
-    void SetPoint(Vector2 pos)
+    void AddPoint(Vector2 pos)
     {
-        if(points.Count >= 2) edgeCollider.SetPoints(points);
+        if (points.Count >= 2) currentCollider.SetPoints(points);
 
         points.Add(pos);
 
-        lineRenderer.positionCount = points.Count;
-        lineRenderer.SetPosition(points.Count - 1, pos);
+        currentLine.positionCount = points.Count;
+        currentLine.SetPosition(points.Count - 1, pos);
+    }
+
+    void CreateNewSegment()
+    {
+        GameObject segment = Instantiate(tailSegmentPrefab, transform);
+
+        currentLine = segment.GetComponent<LineRenderer>();
+        currentCollider = segment.GetComponent<EdgeCollider2D>();
+
+        currentCollider.points = new Vector2[] { new Vector2(99999, 99999), new Vector2(99999, 100000) };
+
+        currentLine.material = tailMaterial;
+
+        points = new List<Vector2>();
+    }
+
+    public void StartNewSegment()
+    {
+        CreateNewSegment();
+    }
+
+    public void ResetTail()
+    {
+        foreach (Transform child in transform)
+            Destroy(child.gameObject);
+
+        points.Clear();
+        currentLine = null;
+        currentCollider = null;
+
+        CreateNewSegment();
+    }
+
+    public void SetTail(Material material)
+    {
+        tailMaterial = material;
+
+        foreach (Transform child in transform)
+        {
+            LineRenderer lr = child.GetComponent<LineRenderer>();
+            if (lr != null)
+                lr.material = material;
+        }
+
+        if (headScript != null)
+            headScript.playerColor = material.color;
     }
 
     public void SetStartingTail()
     {
+        CreateNewSegment();
+            
         Vector2 headPos = head.position;
 
         for (int i = 3; i > 0; i--)
         {
             Vector2 point = headPos - (Vector2)head.up * spacing * i;
-            SetPoint(point);
+            AddPoint(point);
         }
 
-        SetPoint(headPos);
-    }
-
-    public void ResetTail()
-    {
-        points.Clear();
-
-        lineRenderer.positionCount = 0;
-
-        edgeCollider.points = new Vector2[] { new Vector2(99999, 99999), new Vector2(99999, 100000) };
-    }
-
-    public void SetTail(Material material)
-    {
-        lineRenderer.material = material;
+        AddPoint(headPos);
     }
 }
