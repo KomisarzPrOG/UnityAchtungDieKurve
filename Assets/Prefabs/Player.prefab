@@ -81,6 +81,8 @@ MonoBehaviour:
   head: {fileID: 8991603243393386149}
   tailSegmentPrefab: {fileID: 5048859331261912097, guid: f62af4f9567ace347bc2f12c532dfa41, type: 3}
   spacing: 0.1
+  holeChance: 0.000001
+  holeDuration: 0.000001
 --- !u!1 &8620067534987858191
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,7 +185,7 @@ MonoBehaviour:
   Name: PlaceHolder
   id: 0
   tail: {fileID: 1353251065057701718}
-  baseSpeed: 1.06
+  baseSpeed: 1.5
   turnSpeed: 180
   LeftKey: 276
   RightKey: 275
