@@ -1548,6 +1548,7 @@ MonoBehaviour:
   - {fileID: 6582089866692654689, guid: 0348ba472262d1a4fb767550aed86789, type: 3}
   - {fileID: 2195800503492046517, guid: 0fcaa9da7a939104e8e35a78a14aff8f, type: 3}
   - {fileID: 2399155254777587481, guid: 20d26b9f2178c4e489424bee3afa8001, type: 3}
+  - {fileID: 5193257471856001395, guid: 060a0d13a49e7984b95b420cc8a06450, type: 3}
   minBounds: {x: -6.18, y: -4.6}
   maxBounds: {x: 2.95, y: 4.6}
   spawnInterval: 2.5
@@ -1702,6 +1703,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2000368816}
+  - component: {fileID: 2000368817}
   m_Layer: 0
   m_Name: GameBorder
   m_TagString: Untagged
@@ -1728,6 +1730,28 @@ Transform:
   - {fileID: 283508137}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2000368817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2000368815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69d4dcc8b37472f4faed2a39fd4368a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  topBorder: {fileID: 808877203}
+  bottomBorder: {fileID: 1967382963}
+  leftBorder: {fileID: 1097194524}
+  rightBorder: {fileID: 283508137}
+  blinkSpeed: 2
+  bordersSR:
+  - {fileID: 808877204}
+  - {fileID: 1967382964}
+  - {fileID: 1097194525}
+  - {fileID: 283508138}
 --- !u!1 &2024273437
 GameObject:
   m_ObjectHideFlags: 0
