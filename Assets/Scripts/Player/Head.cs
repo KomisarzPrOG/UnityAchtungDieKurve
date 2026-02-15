@@ -17,6 +17,8 @@ public class Head : MonoBehaviour
     private KeyCode originalLeftKey;
     private KeyCode originalRightKey;
 
+    private Border border;
+
     float input = 0;
 
     public bool isAlive = true;
@@ -47,6 +49,7 @@ public class Head : MonoBehaviour
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        border = GameObject.Find("GameBorder").GetComponent<Border>();
     }
 
     void Start()
@@ -64,7 +67,9 @@ public class Head : MonoBehaviour
     void FixedUpdate()
     {
         if(!isAlive) return;
-        
+
+        border.PlayerOffScreen(this);
+
         transform.Rotate(Vector3.forward * turnSpeed * -input * Time.fixedDeltaTime, Space.Self);
         transform.Translate(Vector3.up * currentSpeed * Time.fixedDeltaTime, Space.Self);
     }
@@ -91,13 +96,21 @@ public class Head : MonoBehaviour
         if (phaseWalk && collision.CompareTag("Tail"))
             return;
 
+        if(border.wrappedActive && collision.CompareTag("Border"))
+            return;
+
+        PlayerDeath();
+    }
+
+    public void PlayerDeath(string customMessage = "")
+    {
         isAlive = false;
         gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
 
         GameManager.Instance.CheckPlayers();
         ScoreHandler.Instance.OnPlayerDeath(id);
         
-        Debug.Log($"{Name} uderzy³ w œciane!");
+        Debug.Log(customMessage != "" ? customMessage : $"{Name} hit a wall!");
     }
 
     public void SetHead(string name, int newId, KeyCode leftKey, KeyCode rightKey, Color color)
