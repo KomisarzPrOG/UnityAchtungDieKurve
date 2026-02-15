@@ -140,7 +140,7 @@ public class GameManager : MonoBehaviour
         if (p == null) return;
         if (players.Contains(p)) return;
 
-        Debug.Log($"Gracz {p.Name} zarejestrowany! ({players.Count+1}/{expectedPlayers})");
+        Debug.Log($"Player {p.Name} registered! ({players.Count+1}/{expectedPlayers})");
         players.Add(p);
 
         if (players.Count == expectedPlayers)
@@ -148,7 +148,7 @@ public class GameManager : MonoBehaviour
             SetUpPlayers();
             ScoreHandler.Instance.SetUpPlayerScores();
             ScoreHandler.Instance.UpdateUI();
-            Debug.Log("Wykryto wszystkich graczy!");
+            Debug.Log("Detected every player!");
         }
     }
 
@@ -200,7 +200,7 @@ public class GameManager : MonoBehaviour
     void PlayerWon(Head player)
     {
         state = GameState.GameOver;
-        Debug.Log($"{player.Name} wygrywa!");
+        Debug.Log($"{player.Name} won!");
 
         GameObject winWindowObj = Instantiate(winWindowPrefab, GameObject.Find("WinScreen").transform);
         WinWindowHandler winWindowAccess = winWindowObj.GetComponent<WinWindowHandler>();
