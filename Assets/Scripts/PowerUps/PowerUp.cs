@@ -10,6 +10,11 @@ public abstract class PowerUp : MonoBehaviour
     
     public SpriteRenderer Border;
 
+    protected List<Head> playerList
+    {
+        get { return GameManager.Instance.GetAllPlayers(); }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Head player = collision.gameObject.GetComponent<Head>();

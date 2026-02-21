@@ -14,8 +14,6 @@ public class SlowDown : PowerUp
 
     protected override void ApplyToOthers(Head collector)
     {
-        List<Head> playerList = GameManager.Instance.GetAllPlayers();
-
         foreach (Head player in playerList)
         {
             if (player != collector && player.isAlive)
