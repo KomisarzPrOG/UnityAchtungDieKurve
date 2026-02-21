@@ -18,7 +18,7 @@ public class SpeedBoost : PowerUp
 
         foreach(Head player in playerList)
         {
-            if(player != collector)
+            if(player != collector && player.isAlive)
                 player.StartCoroutine(player.ModifySpeed(speedMultiplier, duration));
         }
     }

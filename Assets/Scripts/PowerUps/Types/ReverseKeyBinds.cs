@@ -17,7 +17,7 @@ public class ReverseKeyBinds : PowerUp
 
         foreach (Head player in playerList)
         {
-            if(player != collector)
+            if(player != collector && player.isAlive)
                 player.StartCoroutine(player.ReverseKeyBinds(duration));
         }
     }
