@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,6 +19,15 @@ public class Tail : MonoBehaviour
 
     private List<Vector2> points = new List<Vector2>();
 
+    [Header("Gap Settings")]
+    [SerializeField] float minDistanceBetweenGaps = 3f;
+    [SerializeField] float gapLength = 30f;
+    [SerializeField] float gapProbability = 0.05f;
+
+    private float distanceSinceLastGap = 0f;
+    private float currentGapDistance = 0f;
+    private bool isGapActive = false;
+
 
     void Update()
     {
@@ -34,7 +44,36 @@ public class Tail : MonoBehaviour
         }
 
         if (Vector2.Distance(points[points.Count - 1], headPos) > spacing)
+        {
+            float delta = Vector2.Distance(points[points.Count - 1], headPos);
+            distanceSinceLastGap += delta;
+
+            if (isGapActive)
+            {
+                currentGapDistance += delta;
+
+                if (currentGapDistance >= gapLength)
+                {
+                    isGapActive = false;
+                    distanceSinceLastGap = 0f;
+                    StartNewSegment();
+                }
+
+                return;
+            }
+
+            if (distanceSinceLastGap >= minDistanceBetweenGaps)
+            {
+                if (Random.value < gapProbability)
+                {
+                    isGapActive = true;
+                    currentGapDistance = 0f;
+                    return;
+                }
+            }
+
             AddPoint(headPos);
+        }
     }
 
     void AddPoint(Vector2 pos)
@@ -103,7 +142,7 @@ public class Tail : MonoBehaviour
         {
             Vector2 point = headPos - (Vector2)head.up * spacing * i;
             AddPoint(point);
-        }
+        }   
 
         AddPoint(headPos);
     }
