@@ -46,6 +46,9 @@ public class Head : MonoBehaviour
     public bool phaseWalk { get; private set; } = false;
     int phaseWalkCount = 0;
 
+    bool mazeMove = false;
+    int mazeMoveCount = 0;
+
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -60,8 +63,11 @@ public class Head : MonoBehaviour
     void Update()
     {
         if (!isAlive) return;
-            
-        input = getInput();
+
+        if (mazeMove)
+            MazeMoveHandler();
+        else
+            input = getInput();
     }
 
     void FixedUpdate()
@@ -70,8 +76,22 @@ public class Head : MonoBehaviour
 
         border.PlayerOffScreen(this);
 
-        transform.Rotate(Vector3.forward * turnSpeed * -input * Time.fixedDeltaTime, Space.Self);
+        if(!mazeMove)
+            transform.Rotate(Vector3.forward * turnSpeed * -input * Time.fixedDeltaTime, Space.Self);
+        
         transform.Translate(Vector3.up * currentSpeed * Time.fixedDeltaTime, Space.Self);
+    }
+
+    void MazeMoveHandler()
+    {
+        if (Input.GetKeyDown(LeftKey))
+        {
+            transform.Rotate(Vector3.forward * 90f);
+        }
+        else if (Input.GetKeyDown(RightKey))
+        {
+            transform.Rotate(Vector3.forward * -90f);
+        }
     }
 
     float getInput()
@@ -196,5 +216,20 @@ public class Head : MonoBehaviour
         Color c = spriteRenderer.color;
         c.a = alpha;
         spriteRenderer.color = c;
+    }
+
+    public IEnumerator ActivateMazeMove(float duration)
+    {
+        mazeMoveCount++; 
+
+        if(mazeMoveCount == 1)
+            mazeMove = true;
+
+        yield return new WaitForSeconds(duration);
+
+        mazeMoveCount--;
+
+        if(mazeMoveCount == 0)
+            mazeMove = false;
     }
 }
