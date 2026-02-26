@@ -8,10 +8,13 @@ public class Tail : MonoBehaviour
     [SerializeField] Head headScript;
     [SerializeField] Transform head;
     [SerializeField] GameObject tailSegmentPrefab;
+    public Head Owner => headScript;
 
     [Header("Settings")]
     [SerializeField] float spacing = 0.1f;
+    [SerializeField] float baseWidth = 0.2f;
 
+    private float currentSize = 1f;
     private Material tailMaterial;
 
     private LineRenderer currentLine;
@@ -27,6 +30,8 @@ public class Tail : MonoBehaviour
     private float distanceSinceLastGap = 0f;
     private float currentGapDistance = 0f;
     private bool isGapActive = false;
+
+    private float edgeRadius = 0f;
 
 
     void Update()
@@ -57,6 +62,7 @@ public class Tail : MonoBehaviour
                     isGapActive = false;
                     distanceSinceLastGap = 0f;
                     StartNewSegment();
+                    StartCoroutine(BruteForceGapHitboxFix());
                 }
 
                 return;
@@ -98,6 +104,8 @@ public class Tail : MonoBehaviour
         currentLine.material = tailMaterial;
 
         points = new List<Vector2>();
+
+        SetSize(headScript.CurrentSize);
     }
 
     public void StartNewSegment()
@@ -135,15 +143,51 @@ public class Tail : MonoBehaviour
     public void SetStartingTail()
     {
         CreateNewSegment();
-            
+
         Vector2 headPos = head.position;
 
         for (int i = 3; i > 0; i--)
         {
             Vector2 point = headPos - (Vector2)head.up * spacing * i;
             AddPoint(point);
-        }   
+        }
 
         AddPoint(headPos);
+    }
+
+    public void SetSize(float multiplier)
+    {
+        currentSize = multiplier;
+
+        if (currentLine != null)
+        {
+            currentLine.startWidth = baseWidth * currentSize;
+            currentLine.endWidth = baseWidth * currentSize;
+        }
+    }
+
+    // Probably the worst idea of how to fix gap hitboxes but it works
+    private IEnumerator BruteForceGapHitboxFix()
+    {
+        yield return new WaitForSeconds(0.25f);
+
+        StartNewSegment();
+
+        Vector2 headPos = head.position;
+
+        for (int i = 1; i > 0; i--)
+        {
+            Vector2 point = headPos - (Vector2)head.up * spacing * i;
+            AddPoint(point);
+        }
+
+        AddPoint(headPos);
+
+        if (currentCollider != null)
+        {
+            currentCollider.edgeRadius = (baseWidth * currentSize) * 0.25f;
+            edgeRadius = currentCollider.edgeRadius;
+        }
+        currentCollider.edgeRadius = edgeRadius;
     }
 }

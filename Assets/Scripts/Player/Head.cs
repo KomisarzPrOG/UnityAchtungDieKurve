@@ -38,21 +38,31 @@ public class Head : MonoBehaviour
         }
     }
 
+
     [SerializeField] float blinkSpeed = 2f;
 
     private SpriteRenderer spriteRenderer;
     private Coroutine blinkRoutine;
 
+
     public bool phaseWalk { get; private set; } = false;
     int phaseWalkCount = 0;
 
-    bool mazeMove = false;
+    public bool mazeMove { get; private set; } = false;
     int mazeMoveCount = 0;
+
+
+    private int sizeEffectCount = 0;
+    public float sizeMultiplier { get; private set; } = 1f;
+    private Vector3 baseScale;
+
+    public float CurrentSize => sizeMultiplier;
 
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         border = GameObject.Find("GameBorder").GetComponent<Border>();
+        baseScale = transform.localScale;
     }
 
     void Start()
@@ -118,6 +128,24 @@ public class Head : MonoBehaviour
 
         if(border.wrappedActive && collision.CompareTag("Border"))
             return;
+
+        if (collision.CompareTag("Tail"))
+        {
+            Tail hitTail = collision.GetComponentInParent<Tail>();
+
+            if (hitTail != null && hitTail.Owner == this)
+            {
+                Vector2 contactPoint = collision.ClosestPoint(transform.position);
+
+                Vector2 toContact = (contactPoint - (Vector2)transform.position).normalized;
+                Vector2 forward = transform.up;
+
+                float dot = Vector2.Dot(forward, toContact);
+
+                if (dot < 0f)
+                    return;
+            }
+        }
 
         PlayerDeath();
     }
@@ -231,5 +259,29 @@ public class Head : MonoBehaviour
 
         if(mazeMoveCount == 0)
             mazeMove = false;
+    }
+
+    public IEnumerator ModifySize(float multiplier, float duration)
+    {
+        sizeEffectCount++;
+
+        sizeMultiplier *= multiplier;
+        ApplySize();
+
+        yield return new WaitForSeconds(duration);
+
+        sizeMultiplier /= multiplier;
+        sizeEffectCount--;
+
+        ApplySize();
+    }
+
+    void ApplySize()
+    {
+        transform.localScale = baseScale * sizeMultiplier;
+
+        // TODO: fix a small gap when applying new size
+        tail.StartNewSegment();
+        tail.SetSize(sizeMultiplier);
     }
 }
