@@ -16,7 +16,7 @@ public class WrappedBorders : PowerUp
         throw new System.NotImplementedException();
     }
 
-    protected override void ApplyGlobal()
+    protected override void ApplyGlobal(Head collector)
     {
         Border border = GameObject.Find("GameBorder").GetComponent<Border>();
 

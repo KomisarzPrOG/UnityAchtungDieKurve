@@ -39,14 +39,14 @@ public abstract class PowerUp : MonoBehaviour
                 ApplyToOthers(collector);
                 break;
             case PowerUpTargetType.Global:
-                ApplyGlobal();
+                ApplyGlobal(collector);
                 break;
         }
     }
 
     protected abstract void ApplySelf(Head player);
     protected abstract void ApplyToOthers(Head collector);
-    protected abstract void ApplyGlobal();
+    protected abstract void ApplyGlobal(Head collector);
 
     public void RandomizeTargetType()
     {

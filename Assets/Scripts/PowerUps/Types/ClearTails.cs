@@ -13,7 +13,7 @@ public class ClearTails : PowerUp
         throw new System.NotImplementedException();
     }
 
-    protected override void ApplyGlobal()
+    protected override void ApplyGlobal(Head collector)
     {
         List<Head> playerList = GameManager.Instance.GetAllPlayers();
 

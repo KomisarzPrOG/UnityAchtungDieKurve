@@ -20,7 +20,7 @@ public class ReverseKeyBinds : PowerUp
         }
     }
 
-    protected override void ApplyGlobal()
+    protected override void ApplyGlobal(Head collector)
     {
         throw new System.NotImplementedException();
     }
