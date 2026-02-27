@@ -10,14 +10,23 @@ public class PowerUpSpawner : MonoBehaviour
     public float spawnInterval = 2.5f;
     public int spawnChance = 20;
 
-    private void Start()
+    public static PowerUpSpawner Instance;
+
+    private void Awake()
     {
-        InvokeRepeating(nameof(SpawnPowerUp), 5f, spawnInterval);
+        Instance = this;
     }
 
-    void SpawnPowerUp()
+    private void Start()
     {
-        if (Random.Range(0f, 100f) > spawnChance) return;
+        InvokeRepeating(nameof(InternalSpawn), 5f, spawnInterval);
+    }
+
+    private void InternalSpawn() { SpawnPowerUp(); }
+
+    public void SpawnPowerUp(bool skipChance = false)
+    {
+        if (!skipChance && Random.Range(0f, 100f) > spawnChance) return;
 
         int index = Random.Range(0, powerUpPrefabs.Count);
         Vector2 position = new Vector2(
