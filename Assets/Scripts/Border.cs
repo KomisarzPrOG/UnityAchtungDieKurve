@@ -38,7 +38,7 @@ public class Border : MonoBehaviour
 
         if (!offScreen) return;
 
-        if(wrappedActive)
+        if(wrappedActive || player.playerWrap)
         {
             WrapPlayer(player, minX, maxX, minY, maxY);
         }

@@ -55,8 +55,11 @@ public class Head : MonoBehaviour
     private int sizeEffectCount = 0;
     public float sizeMultiplier { get; private set; } = 1f;
     private Vector3 baseScale;
-
     public float CurrentSize => sizeMultiplier;
+
+    public bool playerWrap { get; private set; } = false;
+    private int playerWrapCount = 0;
+    private Coroutine warpBlinkRoutine;
 
     void Awake()
     {
@@ -114,6 +117,7 @@ public class Head : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (!isAlive) return;
+        if (collision.CompareTag("Head")) return;
 
         PowerUp powerUp = collision.GetComponent<PowerUp>();
         if (powerUp != null)
@@ -126,7 +130,7 @@ public class Head : MonoBehaviour
         if (phaseWalk && collision.CompareTag("Tail"))
             return;
 
-        if(border.wrappedActive && collision.CompareTag("Border"))
+        if((border.wrappedActive || playerWrap) && collision.CompareTag("Border"))
             return;
 
         if (collision.CompareTag("Tail"))
@@ -226,26 +230,6 @@ public class Head : MonoBehaviour
         }
     }
 
-    private IEnumerator PhaseBlink()
-    {
-        while (true)
-        {
-            float alpha = Mathf.Lerp(0.2f, 1f,
-                Mathf.PingPong(Time.time * blinkSpeed, 1f));
-
-            SetAlpha(alpha);
-
-            yield return null;
-        }
-    }
-
-    private void SetAlpha(float alpha)
-    {
-        Color c = spriteRenderer.color;
-        c.a = alpha;
-        spriteRenderer.color = c;
-    }
-
     public IEnumerator ActivateMazeMove(float duration)
     {
         mazeMoveCount++; 
@@ -280,8 +264,49 @@ public class Head : MonoBehaviour
     {
         transform.localScale = baseScale * sizeMultiplier;
 
-        // TODO: fix a small gap when applying new size
         tail.StartNewSegment();
         tail.SetSize(sizeMultiplier);
+    }
+
+    public IEnumerator PlayerWarp(float duration)
+    {
+        playerWrapCount++;
+
+        if(playerWrapCount == 1)
+        {
+            playerWrap = true;
+            warpBlinkRoutine = StartCoroutine(WarpBlink());
+        }
+
+        yield return new WaitForSeconds(duration);
+
+        playerWrapCount--;
+
+        if(playerWrapCount == 0)
+        {
+            playerWrap = false;
+            if(warpBlinkRoutine != null)
+                StopCoroutine(warpBlinkRoutine);
+        }
+    }
+
+    private IEnumerator WarpBlink()
+    {
+        while (true)
+        {
+            float alpha = Mathf.Lerp(0.2f, 1f,
+                Mathf.PingPong(Time.time * blinkSpeed, 1f));
+
+            SetAlpha(alpha);
+
+            yield return null;
+        }
+    }
+
+    private void SetAlpha(float alpha)
+    {
+        Color c = spriteRenderer.color;
+        c.a = alpha;
+        spriteRenderer.color = c;
     }
 }
