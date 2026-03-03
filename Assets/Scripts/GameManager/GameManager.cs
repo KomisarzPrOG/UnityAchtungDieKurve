@@ -227,4 +227,12 @@ public class GameManager : MonoBehaviour
 
         return null;
     }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Vector3 center = new Vector3((minBounds.x + maxBounds.x) / 2, (minBounds.y + maxBounds.y) / 2, 0);
+        Vector3 size = new Vector3(maxBounds.x - minBounds.x, maxBounds.y - minBounds.y, 0.1f);
+        Gizmos.DrawWireCube(center, size);
+    }
 }
