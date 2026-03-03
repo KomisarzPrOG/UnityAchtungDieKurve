@@ -1223,8 +1223,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   expectedPlayers: 2
-  minBounds: {x: -6.18, y: -4.6}
-  maxBounds: {x: 2.95, y: 4.6}
+  minBounds: {x: -6, y: -4.42}
+  maxBounds: {x: 2.77, y: 4.42}
   winWindowPrefab: {fileID: 2674877530356996325, guid: dc64399e5c7821b4e98bb893f28c8353, type: 3}
   escapeRequiredTime: 3
 --- !u!4 &1320419237
@@ -1556,18 +1556,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerUpPrefabs:
-  - {fileID: 8532384477650473156, guid: 13802462715da484e85ca8406e652335, type: 3}
-  - {fileID: 8342649655938575634, guid: 1c8440c4b8396e74098b00df0ecac7e8, type: 3}
-  - {fileID: 6582089866692654689, guid: 0348ba472262d1a4fb767550aed86789, type: 3}
-  - {fileID: 2195800503492046517, guid: 0fcaa9da7a939104e8e35a78a14aff8f, type: 3}
-  - {fileID: 2399155254777587481, guid: 20d26b9f2178c4e489424bee3afa8001, type: 3}
-  - {fileID: 5193257471856001395, guid: 060a0d13a49e7984b95b420cc8a06450, type: 3}
-  - {fileID: 1979565399874760910, guid: 84b9a4baf515ca94aa7142906fecaed7, type: 3}
-  - {fileID: 3413493879114169293, guid: 198348452684b0340acb5ed5490b89fd, type: 3}
-  - {fileID: 3691027731778050792, guid: 2fafebfa9f2b7cb459908c9e3ff14368, type: 3}
-  - {fileID: 8432727801765000283, guid: 64346137319ceb04a93a054a4ee9e296, type: 3}
-  - {fileID: 8004142252137233506, guid: 8f7fab70952caaf4089cccbff8290072, type: 3}
-  - {fileID: 7091197866861609681, guid: ae2368750098ab346a0e7b9bee3834e7, type: 3}
+  - prefab: {fileID: 4909970846357116962, guid: 455e3434cffe73b4d85bebefb7ce244e, type: 3}
+    weight: 20
+  - prefab: {fileID: 6582089866692654689, guid: 0348ba472262d1a4fb767550aed86789, type: 3}
+    weight: 30
+  - prefab: {fileID: 3413493879114169293, guid: 198348452684b0340acb5ed5490b89fd, type: 3}
+    weight: 60
+  - prefab: {fileID: 3691027731778050792, guid: 2fafebfa9f2b7cb459908c9e3ff14368, type: 3}
+    weight: 60
+  - prefab: {fileID: 1979565399874760910, guid: 84b9a4baf515ca94aa7142906fecaed7, type: 3}
+    weight: 50
+  - prefab: {fileID: 2399155254777587481, guid: 20d26b9f2178c4e489424bee3afa8001, type: 3}
+    weight: 40
+  - prefab: {fileID: 8432727801765000283, guid: 64346137319ceb04a93a054a4ee9e296, type: 3}
+    weight: 50
+  - prefab: {fileID: 8004142252137233506, guid: 8f7fab70952caaf4089cccbff8290072, type: 3}
+    weight: 45
+  - prefab: {fileID: 2195800503492046517, guid: 0fcaa9da7a939104e8e35a78a14aff8f, type: 3}
+    weight: 55
+  - prefab: {fileID: 8342649655938575634, guid: 1c8440c4b8396e74098b00df0ecac7e8, type: 3}
+    weight: 60
+  - prefab: {fileID: 8532384477650473156, guid: 13802462715da484e85ca8406e652335, type: 3}
+    weight: 60
+  - prefab: {fileID: 7091197866861609681, guid: ae2368750098ab346a0e7b9bee3834e7, type: 3}
+    weight: 30
+  - prefab: {fileID: 5193257471856001395, guid: 060a0d13a49e7984b95b420cc8a06450, type: 3}
+    weight: 60
+  powerUpsParent: {fileID: 2024273438}
   minBounds: {x: -6.18, y: -4.6}
   maxBounds: {x: 2.95, y: 4.6}
   spawnInterval: 2.5
