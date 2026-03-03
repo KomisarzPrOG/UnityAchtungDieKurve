@@ -33,6 +33,6 @@ public class RandomPowerUp : PowerUp
 
         int index = Random.Range(0, list.Count);
 
-        return list[index].GetComponent<PowerUp>();
+        return list[index].prefab.GetComponent<PowerUp>();
     }
 }
