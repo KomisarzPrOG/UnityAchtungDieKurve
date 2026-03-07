@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
                     RestartGame(); break;
                 case GameState.GameOver:
                     ScoreHandler.Instance.ClearScores();
-                    SceneHandler.Instance.NextScene(); break;
+                    SceneHandler.Instance.GoToMenu(); break;
             }
         }
 
@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
             if(escapeHoldTime >= escapeRequiredTime)
             {
                 ScoreHandler.Instance.ClearScores();
-                SceneHandler.Instance.NextScene();
+                SceneHandler.Instance.GoToMenu();
             }
 
             float progress = escapeHoldTime / escapeRequiredTime;

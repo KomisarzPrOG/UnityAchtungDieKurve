@@ -128,7 +128,7 @@ public class PlayerSelectManager : MonoBehaviour
     void StartGame()
     {
         PlayerPrefsData.Save(selectedPlayers);
-        SceneHandler.Instance.NextScene();
+        SceneHandler.Instance.GoToGame();
     }
 
     void ChangeText(string control, PlayerConfig player)

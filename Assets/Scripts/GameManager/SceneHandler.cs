@@ -21,18 +21,12 @@ public class SceneHandler : MonoBehaviour
 
     public int SceneIndex() { return SceneManager.GetActiveScene().buildIndex; }
 
-    // by PrzemekBarczyk
     public void RestartScene()
     {
         SceneManager.LoadScene(SceneIndex());
     }
 
-    public void NextScene()
-    {
-        int currentIndex = SceneIndex();
-        int sceneCount = SceneManager.sceneCountInBuildSettings;
-
-        int nextIndex = (currentIndex + 1) % sceneCount;
-        SceneManager.LoadScene(nextIndex);
-    }
+    public void GoToMenu() { SceneManager.LoadScene("MainMenu"); }
+    public void GoToGame() { SceneManager.LoadScene("GameBoard"); }
+    public void GoToSettings() { SceneManager.LoadScene("SettingsScene"); }
 }
