@@ -79,7 +79,10 @@ public class SettingsMenuController : MonoBehaviour
     void Awake()
     {
         if (settings == null)
+        {
             settings = Resources.Load<GameSettings>("GameSettings");
+            Debug.LogWarning("GameSettings nie było podpięte w Inspektorze — załadowano przez Resources.Load");
+        }
 
         _tabOpen = new bool[tabContents.Length];
     }
@@ -205,7 +208,7 @@ public class SettingsMenuController : MonoBehaviour
     // -----------------------------------------------------------------------
     void OnBack()
     {
-        SceneHandler.Instance.GoToMenu();
+        SceneManager.LoadScene("MainMenu");
     }
 
     void OnReset()

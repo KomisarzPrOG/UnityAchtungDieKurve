@@ -14,6 +14,17 @@ public class GameSettings : ScriptableObject
         }
     }
 
+    private void OnEnable()
+    {
+        _instance = this;
+    }
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetInstance()
+    {
+        _instance = null;
+    }
+
     [Header("=== PLAYERS ===")]
     [Tooltip("Player speed")]
     public float playerSpeed = 1.5f;
