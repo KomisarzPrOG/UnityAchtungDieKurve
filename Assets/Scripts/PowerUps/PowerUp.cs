@@ -15,6 +15,11 @@ public abstract class PowerUp : MonoBehaviour
         get { return GameManager.Instance.GetAllPlayers(); }
     }
 
+    protected GameSettings settings
+    {
+        get { return GameSettings.Instance; }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Head player = collision.gameObject.GetComponent<Head>();

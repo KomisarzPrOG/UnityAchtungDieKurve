@@ -66,6 +66,10 @@ public class Head : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         border = GameObject.Find("GameBorder").GetComponent<Border>();
         baseScale = transform.localScale;
+
+        var settings = GameSettings.Instance;
+        baseSpeed = settings.playerSpeed;
+        turnSpeed = settings.playerTurnSpeed;
     }
 
     void Start()

@@ -30,12 +30,57 @@ public class PowerUpSpawner : MonoBehaviour
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
 
+        GetEnabledPowerUps();
         CalculateTotalWeight();
     }
 
     private void Start()
     {
         StartCoroutine(SpawnRoutine());
+    }
+
+    private void GetEnabledPowerUps()
+    {
+        var settings = GameSettings.Instance;
+        if (settings == null)
+        {
+            Debug.LogError("GameSettings not found!");
+            return;
+        }
+        Debug.Log($"speedBoostEnabled: {settings.speedBoostEnabled}");
+
+        if(!settings.powerUpsEnabled)
+        {
+            powerUpPrefabs.Clear();
+            return;
+        }
+
+        var enabled = new List<WeightedPowerUp>();
+
+        foreach(var p in powerUpPrefabs)
+        {
+            var powerUp = p.prefab.GetComponent<PowerUp>();
+            if (powerUp == null) continue;
+
+            if (powerUp is SpeedBoost && !settings.speedBoostEnabled) continue;
+            else if (powerUp is SpeedBoost) p.weight = settings.speedBoostWeight;
+
+            if (powerUp is SlowDown && !settings.slowDownEnabled) continue;
+            else if (powerUp is SlowDown) p.weight = settings.slowDownWeight;
+
+            if (powerUp is Grow && !settings.growEnabled) continue;
+            else if (powerUp is Grow) p.weight = settings.growWeight;
+
+            if (powerUp is Shrink && !settings.shrinkEnabled) continue;
+            else if (powerUp is Shrink) p.weight = settings.shrinkWeight;
+
+            if (powerUp is MazeMove && !settings.mazeMoveEnabled) continue;
+            else if (powerUp is MazeMove) p.weight = settings.mazeMoveWeight;
+
+            enabled.Add(p);
+        }
+
+        powerUpPrefabs = enabled;
     }
 
     private void CalculateTotalWeight()
@@ -67,7 +112,6 @@ public class PowerUpSpawner : MonoBehaviour
             Random.Range(minBounds.y, maxBounds.y)
         );
 
-        // Tworzenie od razu pod rodzicem (wydajniejsze ni¿ SetParent póŸniej)
         GameObject powerUpObject = Instantiate(prefabToSpawn, position, Quaternion.identity, powerUpsParent);
 
         if (powerUpObject.TryGetComponent<PowerUp>(out var powerUp))

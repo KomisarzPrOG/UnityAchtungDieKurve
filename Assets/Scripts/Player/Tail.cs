@@ -33,6 +33,13 @@ public class Tail : MonoBehaviour
 
     private float edgeRadius = 0f;
 
+    private void Awake()
+    {
+        var settings = GameSettings.Instance;
+        baseWidth = settings.playerLineWidth;
+        gapLength = settings.gapSize;
+        gapProbability = settings.gapFrequency;
+    }
 
     void Update()
     {

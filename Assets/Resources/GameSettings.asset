@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fb2538c89475694f99a50ee9032c7fd, type: 3}
+  m_Name: GameSettings
+  m_EditorClassIdentifier: 
+  playerSpeed: 1.5
+  playerTurnSpeed: 180
+  playerLineWidth: 0.2
+  gapFrequency: 0.05
+  gapSize: 5
+  powerUpsEnabled: 1
+  speedBoostEnabled: 1
+  speedBoostMultiplier: 1.25
+  speedBoostDuration: 6
+  speedBoostWeight: 60
+  slowDownEnabled: 1
+  slowDownMultiplier: 0.75
+  slowDownDuration: 6
+  slowDownWeight: 60
+  growEnabled: 1
+  growMultiplier: 1.05
+  growDuration: 8
+  growWeight: 60
+  shrinkEnabled: 1
+  shrinkMultiplier: 0.95
+  shrinkDuration: 8
+  shrinkWeight: 60
+  mazeMoveEnabled: 1
+  mazeMoveWeight: 50.348473

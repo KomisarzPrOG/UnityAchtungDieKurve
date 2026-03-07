@@ -8,6 +8,12 @@ public class Grow : PowerUp
     public float duration = 8f;
     public float multiplier = 1.05f;
 
+    private void Awake()
+    {
+        duration = settings.growDuration;
+        multiplier = settings.growMultiplier;
+    }
+
     protected override void ApplySelf(Head player)
     {
         player.StartCoroutine(player.ModifySize(multiplier, duration));
