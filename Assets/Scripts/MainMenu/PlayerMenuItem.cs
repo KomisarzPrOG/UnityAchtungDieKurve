@@ -62,35 +62,21 @@ public class PlayerMenuItem : MonoBehaviour
         Toggle();
     }
 
-    /*private void Update()
+    private void Update()
     {
-        if(timeBeforeNextCheck > 0)
-        {
-            timeBeforeNextCheck -= Time.deltaTime;
-            return;
-        }
-
-        if (PlayerSelectManager.Instance.IsWaitingForInput() || PlayerSelectManager.Instance.ignoreInputUntill > Time.time) return;
-
+        if (PlayerSelectManager.Instance.IsWaitingForInput()) return;
         HandleNumberInput();
-    }*/
+    }
 
     void HandleNumberInput()
     {
         int pressedNum = 0;
-
-        if(Input.GetKeyDown(KeyCode.Alpha1))
-            pressedNum = 1;
-        else if(Input.GetKeyDown(KeyCode.Alpha2))
-            pressedNum = 2;
-        else if(Input.GetKeyDown(KeyCode.Alpha3))
-            pressedNum = 3;
-        else if (Input.GetKeyDown(KeyCode.Alpha4))
-            pressedNum = 4;
-        else if (Input.GetKeyDown(KeyCode.Alpha5))
-            pressedNum = 5;
-        else if (Input.GetKeyDown(KeyCode.Alpha6))
-            pressedNum = 6;
+        if (Input.GetKeyDown(KeyCode.Alpha1)) pressedNum = 1;
+        else if (Input.GetKeyDown(KeyCode.Alpha2)) pressedNum = 2;
+        else if (Input.GetKeyDown(KeyCode.Alpha3)) pressedNum = 3;
+        else if (Input.GetKeyDown(KeyCode.Alpha4)) pressedNum = 4;
+        else if (Input.GetKeyDown(KeyCode.Alpha5)) pressedNum = 5;
+        else if (Input.GetKeyDown(KeyCode.Alpha6)) pressedNum = 6;
 
         if (pressedNum == playerID)
             Toggle();

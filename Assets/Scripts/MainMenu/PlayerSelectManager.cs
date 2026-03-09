@@ -8,14 +8,19 @@ public class PlayerSelectManager : MonoBehaviour
     public static PlayerSelectManager Instance;
 
     public List<PlayerConfig> selectedPlayers = new List<PlayerConfig>();
-    int currentPlayer = 0;
-    bool waitingForLeftKey = false;
-    bool waitingForRightKey = false;
-
-    public float ignoreInputUntill = 0f;
+    [SerializeField] int currentPlayer = 0;
+    [SerializeField] bool waitingForLeftKey = false;
+    [SerializeField] bool waitingForRightKey = false;
 
     HashSet<KeyCode> forbiddenKeys = new()
     {
+        KeyCode.Alpha1,
+        KeyCode.Alpha2,
+        KeyCode.Alpha3,
+        KeyCode.Alpha4,
+        KeyCode.Alpha5,
+        KeyCode.Alpha6,
+
         KeyCode.Escape,
         KeyCode.Space,
         KeyCode.F11,
@@ -46,6 +51,20 @@ public class PlayerSelectManager : MonoBehaviour
         }
 
         Instance = this;
+        ResetState();
+    }
+
+    private void Start()
+    {
+        ResetState();
+    }
+
+    public void ResetState()
+    {
+        selectedPlayers.Clear();
+        currentPlayer = 0;
+        waitingForLeftKey = false;
+        waitingForRightKey = false;
     }
 
     public void SelectPlayer(int id, string name, Material material, TMP_Text left, TMP_Text right)
@@ -62,32 +81,28 @@ public class PlayerSelectManager : MonoBehaviour
 
         selectedPlayers.RemoveAt(index);
 
-        if (currentPlayer >= selectedPlayers.Count)
-        {
-            currentPlayer = selectedPlayers.Count;
-            waitingForLeftKey = false;
-            waitingForRightKey = false;
-        }
+        waitingForLeftKey = false;
+        waitingForRightKey = false;
 
-        if (selectedPlayers.Count > 0 && currentPlayer < selectedPlayers.Count)
+        currentPlayer = selectedPlayers.FindIndex(p => p.leftKey == KeyCode.None);
+
+        if (currentPlayer == -1)
+            currentPlayer = selectedPlayers.Count;
+        else
             waitingForLeftKey = true;
     }
 
     private void Update()
     {
-        if(Time.time < ignoreInputUntill) return;
-
         if (waitingForLeftKey || waitingForRightKey)
             DetectKey();
 
-        if (Input.GetKeyDown(KeyCode.Space) && selectedPlayers.Count >= 2)
+        if (Input.GetKeyDown(KeyCode.Space) && selectedPlayers.Count >= 2 && !IsWaitingForInput())
             StartGame();
     }
 
     void DetectKey()
     {
-        if (Time.time < ignoreInputUntill) return;
-
         foreach(KeyCode key in System.Enum.GetValues(typeof(KeyCode)))
         {
             if(!Input.GetKeyDown(key)) continue;
@@ -119,8 +134,6 @@ public class PlayerSelectManager : MonoBehaviour
                 currentPlayer++;
                 if(currentPlayer < selectedPlayers.Count)
                     waitingForLeftKey = true;
-
-                IgnoreInputFor(0.35f);
             }
         }
     }
@@ -128,7 +141,7 @@ public class PlayerSelectManager : MonoBehaviour
     void StartGame()
     {
         PlayerPrefsData.Save(selectedPlayers);
-        SceneHandler.Instance.GoToGame();
+        SceneHandler.GoToGame();
     }
 
     void ChangeText(string control, PlayerConfig player)
@@ -142,10 +155,5 @@ public class PlayerSelectManager : MonoBehaviour
     public bool IsWaitingForInput()
     {
         return waitingForLeftKey || waitingForRightKey;
-    }
-
-    public void IgnoreInputFor(float time)
-    {
-        ignoreInputUntill = Time.time + time;
     }
 }
