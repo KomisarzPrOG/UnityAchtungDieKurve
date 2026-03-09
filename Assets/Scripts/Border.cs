@@ -39,9 +39,7 @@ public class Border : MonoBehaviour
         if (!offScreen) return;
 
         if(wrappedActive || player.playerWrap)
-        {
             WrapPlayer(player, minX, maxX, minY, maxY);
-        }
         else
             player.PlayerDeath($"{player.Name} was off screen");
     }

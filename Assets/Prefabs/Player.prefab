@@ -81,8 +81,9 @@ MonoBehaviour:
   head: {fileID: 8991603243393386149}
   tailSegmentPrefab: {fileID: 5048859331261912097, guid: f62af4f9567ace347bc2f12c532dfa41, type: 3}
   spacing: 0.1
+  baseWidth: 0.2
   minDistanceBetweenGaps: 3
-  gapLength: 30
+  gapLength: 15
   gapProbability: 0.05
 --- !u!1 &8620067534987858191
 GameObject:

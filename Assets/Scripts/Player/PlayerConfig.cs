@@ -10,8 +10,8 @@ public class PlayerConfig
     public string playerName;
     public Material playerMaterial;
 
-    public KeyCode leftKey;
-    public KeyCode rightKey;
+    public KeyCode leftKey = KeyCode.None;
+    public KeyCode rightKey = KeyCode.None;
 
     public TMP_Text leftKeyText;
     public TMP_Text rightKeyText;
