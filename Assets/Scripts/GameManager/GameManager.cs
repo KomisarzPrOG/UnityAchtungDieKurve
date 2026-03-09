@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -26,26 +24,18 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if(Instance != null)
-        {
-            Instance.players.Clear();
-            Destroy(gameObject);
-            return;
-        }
-
         Instance = this;
-        expectedPlayers = PlayerPrefsData.players.Count;
-        DontDestroyOnLoad(gameObject);
     }
 
     void Start()
     {
+        expectedPlayers = PlayerPrefsData.players.Count;
         Time.timeScale = 0;
     }
 
     void Update()
     {
-        if (SceneHandler.Instance.SceneIndex() == 0) return;
+        if (SceneHandler.SceneIndex() == 0) return;
 
         if(Input.GetKeyDown(KeyCode.Space))
         {
@@ -59,7 +49,7 @@ public class GameManager : MonoBehaviour
                     RestartGame(); break;
                 case GameState.GameOver:
                     ScoreHandler.Instance.ClearScores();
-                    SceneHandler.Instance.GoToMenu(); break;
+                    SceneHandler.GoToMenu(); break;
             }
         }
 
@@ -78,7 +68,7 @@ public class GameManager : MonoBehaviour
             if(escapeHoldTime >= escapeRequiredTime)
             {
                 ScoreHandler.Instance.ClearScores();
-                SceneHandler.Instance.GoToMenu();
+                SceneHandler.GoToMenu();
             }
 
             float progress = escapeHoldTime / escapeRequiredTime;
@@ -180,7 +170,7 @@ public class GameManager : MonoBehaviour
 
     void RestartGame()
     {
-        SceneHandler.Instance.RestartScene();
+        SceneHandler.RestartScene();
         state = GameState.Waiting;
     }
 
