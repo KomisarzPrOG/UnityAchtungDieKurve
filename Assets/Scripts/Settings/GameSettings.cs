@@ -79,7 +79,7 @@ public class GameSettings : ScriptableObject
     public bool shrinkEnabled = true;
     [Tooltip("Shrink multiplier")]
     public float shrinkMultiplier = 0.95f;
-    [Tooltip("Duration (sekundy)")]
+    [Tooltip("Duration (seconds)")]
     public float shrinkDuration = 8f;
     [Tooltip("Chance to spawn this power-up")]
     [Range(0, 100f)]
@@ -90,6 +90,64 @@ public class GameSettings : ScriptableObject
     [Tooltip("Chance to spawn this power-up")]
     [Range(0, 100f)]
     public float mazeMoveWeight = 50f;
+
+    [Header("Power-Up: Phase Walk")]
+    public bool phaseWalkEnabled = true;
+    [Tooltip("Duration (seconds)")]
+    public float phaseWalkDuration = 5f;
+    [Tooltip("Chance to spawn this power-up")]
+    [Range(0, 100f)]
+    public float phaseWalkWeight = 40f;
+
+    [Header("Power-Up: Player Wrap")]
+    public bool playerWrapEnabled = true;
+    [Tooltip("Duration (seconds)")]
+    public float playerWrapDuration = 5f;
+    [Tooltip("Chance to spawn this power-up")]
+    [Range(0, 100f)]
+    public float playerWrapWeight = 50f;
+
+    [Header("Power-Up: Reverse KeyBinds")]
+    public bool reverseKeyBindsEnabled = true;
+    [Tooltip("Duration (seconds)")]
+    public float reverseKeyBindsDuration = 5f;
+    [Tooltip("Chance to spawn this power-up")]
+    [Range(0, 100f)]
+    public float reverseKeyBindsWeight = 55f;
+
+    [Header("Power-Up: Clear Tails")]
+    public bool clearTailsEnabled = true;
+    [Tooltip("Chance to spawn this power-up")]
+    [Range(0, 100f)]
+    public float clearTailsWeight = 30f;
+
+    [Header("Power-Up: Camera Chaos")]
+    public bool cameraChaosEnabled = true;
+    [Tooltip("Duration (seconds)")]
+    public float cameraChaosDuration = 5f;
+    [Tooltip("Chance to spawn this power-up")]
+    [Range(0, 100f)]
+    public float cameraChaosWeight = 20f;
+
+    [Header("Power-Up: Random Power-up")]
+    public bool randomPowerUpEnabled = true;
+    [Tooltip("Chance to spawn this power-up")]
+    [Range(0, 100f)]
+    public float randomPowerUpWeight = 45f;
+
+    [Header("Power-Up: Spawn Power-ups")]
+    public bool spawnPowerUpsEnabled = true;
+    [Tooltip("Chance to spawn this power-up")]
+    [Range(0, 100f)]
+    public float spawnPowerUpsWeight = 25f;
+
+    [Header("Power-Up: Wrapped Borders")]
+    public bool wrappedBordersEnabled = true;
+    [Tooltip("Duration (seconds)")]
+    public float wrappedBordersDuration = 5f;
+    [Tooltip("Chance to spawn this power-up")]
+    [Range(0, 100f)]
+    public float wrappedBordersWeight = 60f;
 
     public void ResetToDefaults()
     {
@@ -124,5 +182,34 @@ public class GameSettings : ScriptableObject
 
         mazeMoveEnabled = true;
         mazeMoveWeight = 50f;
+
+        phaseWalkEnabled = true;
+        phaseWalkDuration = 5f;
+        phaseWalkWeight = 40f;
+
+        playerWrapEnabled = true;
+        playerWrapDuration = 8f;
+        playerWrapWeight = 50f;
+
+        reverseKeyBindsEnabled = true;
+        reverseKeyBindsDuration = 5f;
+        reverseKeyBindsWeight = 55f;
+
+        clearTailsEnabled = true;
+        clearTailsWeight = 30f;
+
+        cameraChaosEnabled = true;
+        cameraChaosDuration = 6f;
+        cameraChaosWeight = 20f;
+
+        randomPowerUpEnabled = true;
+        randomPowerUpWeight = 45f;
+
+        spawnPowerUpsEnabled = true;
+        spawnPowerUpsWeight = 25f;
+
+        wrappedBordersEnabled = true;
+        wrappedBordersDuration = 10f;
+        wrappedBordersWeight = 60f;
     }
 }

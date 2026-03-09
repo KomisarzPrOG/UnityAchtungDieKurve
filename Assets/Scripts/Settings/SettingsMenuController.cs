@@ -69,6 +69,56 @@ public class SettingsMenuController : MonoBehaviour
     [SerializeField] private Slider sliderMazeMoveWeig;
     [SerializeField] private TextMeshProUGUI labelMazeMoveWeig;
 
+    [Header("Phase Walk")]
+    [SerializeField] private Toggle togglePhaseWalk;
+    [SerializeField] private Slider sliderPhaseWalkDur;
+    [SerializeField] private TextMeshProUGUI labelPhaseWalkDur;
+    [SerializeField] private Slider sliderPhaseWalkWeig;
+    [SerializeField] private TextMeshProUGUI labelPhaseWalkWeig;
+
+    [Header("Player Wrap")]
+    [SerializeField] private Toggle togglePlayerWrap;
+    [SerializeField] private Slider sliderPlayerWrapDur;
+    [SerializeField] private TextMeshProUGUI labelPlayerWrapDur;
+    [SerializeField] private Slider sliderPlayerWrapWeig;
+    [SerializeField] private TextMeshProUGUI labelPlayerWrapWeig;
+
+    [Header("Reverse KeyBinds")]
+    [SerializeField] private Toggle toggleReverseKeyBinds;
+    [SerializeField] private Slider sliderReverseKeyBindsDur;
+    [SerializeField] private TextMeshProUGUI labelReverseKeyBindsDur;
+    [SerializeField] private Slider sliderReverseKeyBindsWeig;
+    [SerializeField] private TextMeshProUGUI labelReverseKeyBindsWeig;
+
+    [Header("Clear Tails")]
+    [SerializeField] private Toggle toggleClearTails;
+    [SerializeField] private Slider sliderClearTailsWeig;
+    [SerializeField] private TextMeshProUGUI labelClearTailsWeig;
+
+    [Header("Camera Chaos")]
+    [SerializeField] private Toggle toggleCameraChaos;
+    [SerializeField] private Slider sliderCameraChaosDur;
+    [SerializeField] private TextMeshProUGUI labelCameraChaosDur;
+    [SerializeField] private Slider sliderCameraChaosWeig;
+    [SerializeField] private TextMeshProUGUI labelCameraChaosWeig;
+
+    [Header("Random Power-up")]
+    [SerializeField] private Toggle toggleRandomPowerUp;
+    [SerializeField] private Slider sliderRandomPowerUpWeig;
+    [SerializeField] private TextMeshProUGUI labelRandomPowerUpWeig;
+
+    [Header("Spawn Power-ups")]
+    [SerializeField] private Toggle toggleSpawnPowerUps;
+    [SerializeField] private Slider sliderSpawnPowerUpsWeig;
+    [SerializeField] private TextMeshProUGUI labelSpawnPowerUpsWeig;
+
+    [Header("Wrapped Borders")]
+    [SerializeField] private Toggle toggleWrappedBorders;
+    [SerializeField] private Slider sliderWrappedBordersDur;
+    [SerializeField] private TextMeshProUGUI labelWrappedBordersDur;
+    [SerializeField] private Slider sliderWrappedBordersWeig;
+    [SerializeField] private TextMeshProUGUI labelWrappedBordersWeig;
+
     [Header("Przyciski")]
     [SerializeField] private Button backButton;
     [SerializeField] private Button resetButton;
@@ -84,17 +134,18 @@ public class SettingsMenuController : MonoBehaviour
             Debug.LogWarning("GameSettings nie było podpięte w Inspektorze — załadowano przez Resources.Load");
         }
 
+        Resources.Load<GameSettings>("GameSettings");
+
         _tabOpen = new bool[tabContents.Length];
     }
 
     void Start()
     {
-        // Zamknij wszystkie zakładki na starcie
         for (int i = 0; i < tabContents.Length; i++)
         {
             tabContents[i].SetActive(false);
             _tabOpen[i] = false;
-            int idx = i; // capture for lambda
+            int idx = i;
             tabHeaders[i].onClick.AddListener(() => ToggleTab(idx));
         }
 
@@ -118,9 +169,9 @@ public class SettingsMenuController : MonoBehaviour
         if (tabHeaderTexts != null && index < tabHeaderTexts.Length)
         {
             string name = tabHeaderTexts[index].text;
-            // Zamień ▶ ↔ ▼
-            if (name.StartsWith("▶")) name = "▼" + name.Substring(1);
-            else if (name.StartsWith("▼")) name = "▶" + name.Substring(1);
+
+            if (name.StartsWith(">")) name = "<" + name.Substring(1);
+            else if (name.StartsWith("<")) name = ">" + name.Substring(1);
             tabHeaderTexts[index].text = name;
         }
     }
@@ -160,6 +211,35 @@ public class SettingsMenuController : MonoBehaviour
 
         SetToggle(toggleMazeMove, settings.mazeMoveEnabled);
         SetSlider(sliderMazeMoveWeig, labelMazeMoveWeig, settings.mazeMoveWeight, 0f, 100f, "Szansa: {0:F0}%");
+
+        SetToggle(togglePhaseWalk, settings.phaseWalkEnabled);
+        SetSlider(sliderPhaseWalkDur, labelPhaseWalkDur, settings.phaseWalkDuration, 1f, 15f, "Czas: {0:F0}s");
+        SetSlider(sliderPhaseWalkWeig, labelPhaseWalkWeig, settings.phaseWalkWeight, 0f, 100f, "Szansa: {0:F0}%");
+
+        SetToggle(togglePlayerWrap, settings.playerWrapEnabled);
+        SetSlider(sliderPlayerWrapDur, labelPlayerWrapDur, settings.playerWrapDuration, 1f, 15f, "Czas: {0:F0}s");
+        SetSlider(sliderPlayerWrapWeig, labelPlayerWrapWeig, settings.playerWrapWeight, 0f, 100f, "Szansa: {0:F0}%");
+
+        SetToggle(toggleReverseKeyBinds, settings.reverseKeyBindsEnabled);
+        SetSlider(sliderReverseKeyBindsDur, labelReverseKeyBindsDur, settings.reverseKeyBindsDuration, 1f, 15f, "Czas: {0:F0}s");
+        SetSlider(sliderReverseKeyBindsWeig, labelReverseKeyBindsWeig, settings.reverseKeyBindsWeight, 0f, 100f, "Szansa: {0:F0}%");
+
+        SetToggle(toggleClearTails, settings.clearTailsEnabled);
+        SetSlider(sliderClearTailsWeig, labelClearTailsWeig, settings.clearTailsWeight, 0f, 100f, "Szansa: {0:F0}%");
+
+        SetToggle(toggleCameraChaos, settings.cameraChaosEnabled);
+        SetSlider(sliderCameraChaosDur, labelCameraChaosDur, settings.cameraChaosDuration, 1f, 15f, "Czas: {0:F0}s");
+        SetSlider(sliderCameraChaosWeig, labelCameraChaosWeig, settings.cameraChaosWeight, 0f, 100f, "Szansa: {0:F0}%");
+
+        SetToggle(toggleRandomPowerUp, settings.randomPowerUpEnabled);
+        SetSlider(sliderRandomPowerUpWeig, labelRandomPowerUpWeig, settings.randomPowerUpWeight, 0f, 100f, "Szansa: {0:F0}%");
+
+        SetToggle(toggleSpawnPowerUps, settings.spawnPowerUpsEnabled);
+        SetSlider(sliderSpawnPowerUpsWeig, labelSpawnPowerUpsWeig, settings.spawnPowerUpsWeight, 0f, 100f, "Szansa: {0:F0}%");
+
+        SetToggle(toggleWrappedBorders, settings.wrappedBordersEnabled);
+        SetSlider(sliderWrappedBordersDur, labelWrappedBordersDur, settings.wrappedBordersDuration, 1f, 20f, "Czas: {0:F0}s");
+        SetSlider(sliderWrappedBordersWeig, labelWrappedBordersWeig, settings.wrappedBordersWeight, 0f, 100f, "Szansa: {0:F0}%");
     }
 
     void RegisterSliderListeners()
@@ -193,6 +273,35 @@ public class SettingsMenuController : MonoBehaviour
 
         // Maze Move
         AddSliderListener(sliderMazeMoveWeig, labelMazeMoveWeig, "Szansa: {0:F0}%", v => settings.mazeMoveWeight = v);
+
+        // Phase Walk
+        AddSliderListener(sliderPhaseWalkDur, labelPhaseWalkDur, "Czas: {0:F0}s", v => settings.phaseWalkDuration = v);
+        AddSliderListener(sliderPhaseWalkWeig, labelPhaseWalkWeig, "Szansa: {0:F0}%", v => settings.phaseWalkWeight = v);
+
+        // Player Wrap
+        AddSliderListener(sliderPlayerWrapDur, labelPlayerWrapDur, "Czas: {0:F0}s", v => settings.playerWrapDuration = v);
+        AddSliderListener(sliderPlayerWrapWeig, labelPlayerWrapWeig, "Szansa: {0:F0}%", v => settings.playerWrapWeight = v);
+
+        // Reverse KeyBinds
+        AddSliderListener(sliderReverseKeyBindsDur, labelReverseKeyBindsDur, "Czas: {0:F0}s", v => settings.reverseKeyBindsDuration = v);
+        AddSliderListener(sliderReverseKeyBindsWeig, labelReverseKeyBindsWeig, "Szansa: {0:F0}%", v => settings.reverseKeyBindsWeight = v);
+
+        // Clear Tails
+        AddSliderListener(sliderClearTailsWeig, labelClearTailsWeig, "Szansa: {0:F0}%", v => settings.clearTailsWeight = v);
+
+        // Camera Chaos
+        AddSliderListener(sliderCameraChaosDur, labelCameraChaosDur, "Czas: {0:F0}s", v => settings.cameraChaosDuration = v);
+        AddSliderListener(sliderCameraChaosWeig, labelCameraChaosWeig, "Szansa: {0:F0}%", v => settings.cameraChaosWeight = v);
+
+        // Random Power-up
+        AddSliderListener(sliderRandomPowerUpWeig, labelRandomPowerUpWeig, "Szansa: {0:F0}%", v => settings.randomPowerUpWeight = v);
+
+        // Spawn Power-ups
+        AddSliderListener(sliderSpawnPowerUpsWeig, labelSpawnPowerUpsWeig, "Szansa: {0:F0}%", v => settings.spawnPowerUpsWeight = v);
+
+        // Wrapped Borders
+        AddSliderListener(sliderWrappedBordersDur, labelWrappedBordersDur, "Czas: {0:F0}s", v => settings.wrappedBordersDuration = v);
+        AddSliderListener(sliderWrappedBordersWeig, labelWrappedBordersWeig, "Szansa: {0:F0}%", v => settings.wrappedBordersWeight = v);
     }
 
     void RegisterToggleListeners()
@@ -203,12 +312,20 @@ public class SettingsMenuController : MonoBehaviour
         AddToggleListener(toggleGrow, v => settings.growEnabled = v);
         AddToggleListener(toggleShrink, v => settings.shrinkEnabled = v);
         AddToggleListener(toggleMazeMove, v => settings.mazeMoveEnabled = v);
+        AddToggleListener(togglePhaseWalk, v => settings.phaseWalkEnabled = v);
+        AddToggleListener(togglePlayerWrap, v => settings.playerWrapEnabled = v);
+        AddToggleListener(toggleReverseKeyBinds, v => settings.reverseKeyBindsEnabled = v);
+        AddToggleListener(toggleClearTails, v => settings.clearTailsEnabled = v);
+        AddToggleListener(toggleCameraChaos, v => settings.cameraChaosEnabled = v);
+        AddToggleListener(toggleRandomPowerUp, v => settings.randomPowerUpEnabled = v);
+        AddToggleListener(toggleSpawnPowerUps, v => settings.spawnPowerUpsEnabled = v);
+        AddToggleListener(toggleWrappedBorders, v => settings.wrappedBordersEnabled = v);
     }
 
     // -----------------------------------------------------------------------
     void OnBack()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneHandler.GoToMenu();
     }
 
     void OnReset()
@@ -218,7 +335,7 @@ public class SettingsMenuController : MonoBehaviour
     }
 
     // -----------------------------------------------------------------------
-    // Helpery
+    // Helpers
     void SetSlider(Slider s, TextMeshProUGUI label, float value, float min, float max, string fmt)
     {
         if (s == null) return;
