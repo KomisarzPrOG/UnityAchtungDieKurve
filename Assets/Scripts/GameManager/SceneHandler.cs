@@ -3,30 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneHandler : MonoBehaviour
+public static class SceneHandler
 {
-    public static SceneHandler Instance;
+    public static int SceneIndex() { return SceneManager.GetActiveScene().buildIndex; }
 
-    private void Awake()
-    {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
-
-    public int SceneIndex() { return SceneManager.GetActiveScene().buildIndex; }
-
-    public void RestartScene()
+    public static void RestartScene()
     {
         SceneManager.LoadScene(SceneIndex());
     }
 
-    public void GoToMenu() { SceneManager.LoadScene("MainMenu"); }
-    public void GoToGame() { SceneManager.LoadScene("GameBoard"); }
-    public void GoToSettings() { SceneManager.LoadScene("SettingsScene"); }
+    public static void GoToMenu() { SceneManager.LoadScene("MainMenu"); }
+    public static void GoToGame() { SceneManager.LoadScene("GameBoard"); }
+    public static void GoToSettings() { SceneManager.LoadScene("SettingsScene"); }
 }
