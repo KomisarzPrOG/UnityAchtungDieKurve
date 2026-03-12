@@ -87,6 +87,8 @@ public class GameSettings : ScriptableObject
 
     [Header("Power-Up: Maze Move")]
     public bool mazeMoveEnabled = true;
+    [Tooltip("Duration (seconds)")]
+    public float mazeMoveDuration = 8f;
     [Tooltip("Chance to spawn this power-up")]
     [Range(0, 100f)]
     public float mazeMoveWeight = 50f;
@@ -149,6 +151,14 @@ public class GameSettings : ScriptableObject
     [Range(0, 100f)]
     public float wrappedBordersWeight = 60f;
 
+    [Header("Power-Up: Color Chaos")]
+    public bool colorChaosEnabled = true;
+    [Tooltip("Duration (seconds)")]
+    public float colorChaosDuration = 8f;
+    [Tooltip("Chance to spawn this power-up")]
+    [Range(0, 100f)]
+    public float colorChaosWeight = 80f;
+
     public void ResetToDefaults()
     {
         playerSpeed = 1.5f;
@@ -181,6 +191,7 @@ public class GameSettings : ScriptableObject
         shrinkWeight = 60f;
 
         mazeMoveEnabled = true;
+        shrinkDuration = 8f;
         mazeMoveWeight = 50f;
 
         phaseWalkEnabled = true;
@@ -211,5 +222,9 @@ public class GameSettings : ScriptableObject
         wrappedBordersEnabled = true;
         wrappedBordersDuration = 10f;
         wrappedBordersWeight = 60f;
+
+        colorChaosEnabled = true;
+        colorChaosDuration = 8f;
+        colorChaosWeight = 80f;
     }
 }
