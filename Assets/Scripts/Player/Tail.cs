@@ -15,6 +15,7 @@ public class Tail : MonoBehaviour
     [SerializeField] float baseWidth = 0.2f;
 
     private float currentSize = 1f;
+    private Material originalTailMaterial;
     private Material tailMaterial;
 
     private LineRenderer currentLine;
@@ -134,7 +135,7 @@ public class Tail : MonoBehaviour
 
     public void SetTail(Material material)
     {
-        tailMaterial = material;
+        tailMaterial = originalTailMaterial = material;
 
         foreach (Transform child in transform)
         {
@@ -196,5 +197,19 @@ public class Tail : MonoBehaviour
             edgeRadius = currentCollider.edgeRadius;
         }
         currentCollider.edgeRadius = edgeRadius;
+    }
+
+    public void ChangeColor(Color color)
+    {
+        tailMaterial = PlayerMaterials.Instance.GetMaterial(color);
+        StartNewSegment();
+        currentLine.material = tailMaterial;
+    }
+
+    public void ResetColor()
+    {
+        tailMaterial = originalTailMaterial;
+        StartNewSegment();
+        currentLine.material = tailMaterial;
     }
 }

@@ -8,6 +8,7 @@ public class Head : MonoBehaviour
     public string Name;
     public int id;
     public Tail tail;
+    public Color originalColor;
     public Color playerColor;
 
     [SerializeField] float baseSpeed = 1f;
@@ -135,7 +136,8 @@ public class Head : MonoBehaviour
 
     public void SetHead(string name, int newId, KeyCode leftKey, KeyCode rightKey, Color color)
     {
-        Name = name; id = newId; playerColor = color;
+        Name = name; id = newId; 
+        playerColor = originalColor = color;
         LeftKey = originalLeftKey = leftKey;
         RightKey = originalRightKey = rightKey;
     }
@@ -202,6 +204,18 @@ public class Head : MonoBehaviour
         }
     }
 
+    public IEnumerator ColorChange(float duration)
+    {
+        AddEffect("color");
+
+        ChangeColor(PlayerMaterials.Instance.GetRandomColor(originalColor));
+
+        yield return new WaitForSeconds(duration);
+
+        if (RemoveEffect("color") == 0)
+            ResetColor();
+    }
+
     /* ========================
             HELPERS
        ======================== */
@@ -247,5 +261,17 @@ public class Head : MonoBehaviour
         Color c = spriteRenderer.color;
         c.a = alpha;
         spriteRenderer.color = c;
+    }
+
+    public void ChangeColor(Color color)
+    {
+        playerColor = color;
+        tail.ChangeColor(playerColor);
+    }
+
+    public void ResetColor()
+    {
+        playerColor = originalColor;
+        tail.ResetColor();
     }
 }
