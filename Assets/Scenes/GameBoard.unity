@@ -1202,6 +1202,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1320419237}
   - component: {fileID: 1320419236}
+  - component: {fileID: 1320419238}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1242,6 +1243,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1320419238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320419235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0c7f6ac1afd75c4ea80a4b0b15749fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  red: {fileID: 2100000, guid: f64fbefd42444ac47a2ebdb9c480baad, type: 2}
+  pink: {fileID: 2100000, guid: 2442e4d2ef55a1341932420fe239de3d, type: 2}
+  green: {fileID: 2100000, guid: 3902ae68e27f61041abcc2e75294e742, type: 2}
+  gray: {fileID: 2100000, guid: b4693ddc0eea1d24dab46a933722f9e3, type: 2}
+  orange: {fileID: 2100000, guid: 3aa499aeed9104b4b92000cc3437597d, type: 2}
+  aqua: {fileID: 2100000, guid: 146f5d57a26db30438f26f6521c0f669, type: 2}
 --- !u!1 &1472843084
 GameObject:
   m_ObjectHideFlags: 0
@@ -1582,6 +1601,8 @@ MonoBehaviour:
     weight: 25
   - prefab: {fileID: 5193257471856001395, guid: 060a0d13a49e7984b95b420cc8a06450, type: 3}
     weight: 60
+  - prefab: {fileID: 4757745111274650446, guid: 3b325adf6fc89e140bbd0110c5b23341, type: 3}
+    weight: 80
   powerUpsParent: {fileID: 2024273438}
   minBounds: {x: -6.18, y: -4.6}
   maxBounds: {x: 2.95, y: 4.6}
@@ -1811,7 +1832,7 @@ Transform:
   m_GameObject: {fileID: 2024273437}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.96, y: 1.8, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
