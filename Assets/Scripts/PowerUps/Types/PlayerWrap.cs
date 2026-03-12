@@ -6,6 +6,11 @@ public class PlayerWrap : PowerUp
 {
     float duration = 8f;
 
+    private void Awake()
+    {
+        duration = settings.playerWrapDuration;
+    }
+
     protected override void ApplySelf(Head player)
     {
         player.StartCoroutine(player.PlayerWarp(duration));

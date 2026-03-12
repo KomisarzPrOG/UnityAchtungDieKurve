@@ -77,6 +77,33 @@ public class PowerUpSpawner : MonoBehaviour
             if (powerUp is MazeMove && !settings.mazeMoveEnabled) continue;
             else if (powerUp is MazeMove) p.weight = settings.mazeMoveWeight;
 
+            if (powerUp is PhaseWalk && !settings.phaseWalkEnabled) continue;
+            else if (powerUp is PhaseWalk) p.weight = settings.phaseWalkWeight;
+
+            if (powerUp is PlayerWrap && !settings.playerWrapEnabled) continue;
+            else if (powerUp is PlayerWrap) p.weight = settings.playerWrapWeight;
+
+            if (powerUp is ReverseKeyBinds && !settings.reverseKeyBindsEnabled) continue;
+            else if (powerUp is ReverseKeyBinds) p.weight = settings.reverseKeyBindsWeight;
+
+            if (powerUp is ClearTails && !settings.clearTailsEnabled) continue;
+            else if (powerUp is ClearTails) p.weight = settings.clearTailsWeight;
+
+            if (powerUp is CameraChaosPowerUp && !settings.cameraChaosEnabled) continue;
+            else if (powerUp is CameraChaosPowerUp) p.weight = settings.cameraChaosWeight;
+
+            if (powerUp is RandomPowerUp && !settings.randomPowerUpEnabled) continue;
+            else if (powerUp is RandomPowerUp) p.weight = settings.randomPowerUpWeight;
+
+            if (powerUp is SpawnPowerUps && !settings.spawnPowerUpsEnabled) continue;
+            else if (powerUp is SpawnPowerUps) p.weight = settings.spawnPowerUpsWeight;
+
+            if (powerUp is WrappedBorders && !settings.wrappedBordersEnabled) continue;
+            else if (powerUp is WrappedBorders) p.weight = settings.wrappedBordersWeight;
+
+            if (powerUp is ColorChaos && !settings.colorChaosEnabled) continue;
+            else if (powerUp is ColorChaos) p.weight = settings.colorChaosWeight;
+
             enabled.Add(p);
         }
 

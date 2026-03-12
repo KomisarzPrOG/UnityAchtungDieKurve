@@ -6,6 +6,11 @@ public class PhaseWalk : PowerUp
 {
     public float duration = 5f;
 
+    private void Awake()
+    {
+        duration = settings.phaseWalkDuration;
+    }
+
     protected override void ApplySelf(Head player)
     {
         player.StartCoroutine(player.ActivatePhaseWalk(duration));

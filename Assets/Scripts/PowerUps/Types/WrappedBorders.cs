@@ -6,6 +6,11 @@ public class WrappedBorders : PowerUp
 {
     public float duration = 10f;
 
+    private void Awake()
+    {
+        duration = settings.wrappedBordersDuration;
+    }
+
     protected override void ApplySelf(Head player)
     {
         throw new System.NotImplementedException();

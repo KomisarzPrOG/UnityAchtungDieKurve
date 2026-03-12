@@ -7,6 +7,12 @@ public class Shrink : PowerUp
     public float duration = 8f;
     public float multiplier = 0.9f;
 
+    private void Awake()
+    {
+        duration = settings.shrinkDuration;
+        multiplier = settings.shrinkMultiplier;
+    }
+
     protected override void ApplySelf(Head player)
     {
         player.StartCoroutine(player.ModifySize(multiplier, duration));

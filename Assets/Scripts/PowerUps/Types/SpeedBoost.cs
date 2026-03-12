@@ -7,6 +7,12 @@ public class SpeedBoost : PowerUp
     public float speedMultiplier = 1.25f;
     public float duration = 4f;
 
+    private void Awake()
+    {
+        speedMultiplier = settings.speedBoostMultiplier;
+        duration = settings.speedBoostDuration;
+    }
+
     protected override void ApplySelf(Head player)
     {
         player.StartCoroutine(player.ModifySpeed(speedMultiplier, duration));

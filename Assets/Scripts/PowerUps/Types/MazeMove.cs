@@ -6,6 +6,11 @@ public class MazeMove : PowerUp
 {
     public float duration = 8f;
 
+    private void Awake()
+    {
+        duration = settings.mazeMoveDuration;
+    }
+
     protected override void ApplySelf(Head player)
     {
         player.StartCoroutine(player.ActivateMazeMove(duration));
