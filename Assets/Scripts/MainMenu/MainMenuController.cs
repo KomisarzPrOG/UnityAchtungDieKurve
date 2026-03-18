@@ -3,6 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
+    private float escapeHoldTime = 0f;
+    private const float escapeHoldThreshold = 1f;
+
     public void OnSettingsButton()
     {
         SceneManager.LoadScene("SettingsScene");
@@ -10,8 +13,16 @@ public class MainMenuController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftWindows))
-            Quit();
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            escapeHoldTime += Time.deltaTime;
+            if (escapeHoldTime >= escapeHoldThreshold)
+                Quit();
+        }
+        else
+        {
+            escapeHoldTime = 0f;
+        }
     }
 
     public void Quit()
