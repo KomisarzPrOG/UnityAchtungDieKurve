@@ -54,6 +54,10 @@ public class Head : MonoBehaviour
         var s = GameSettings.Instance;
         baseSpeed = s.playerSpeed;
         turnSpeed = s.playerTurnSpeed;
+
+        float scaleFactor = s.playerLineWidth / 0.2f;
+        baseScale = new Vector3(0.15f, 0.15f, 0.15f) * scaleFactor;
+        transform.localScale = baseScale;
     }
 
     void Start() => GameManager.Instance.RegisterPlayer(this);
