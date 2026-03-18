@@ -24,6 +24,11 @@ Pressing spacebar has a number of functionalities:
       - After the end of round restarts the scene.
       - After one player wins goes back to the Main Menu.
     
+Pressing and holding escape has 2 uses:
+  1. When in Main Menu after 1 second the game closes.
+  2. During round after 3 seconds game goes back to Main Menu.
+
+    
 That's about it, every other control is chosen by players.
 
 ## Power-ups
