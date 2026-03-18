@@ -116,10 +116,7 @@ public class Tail : MonoBehaviour
         SetSize(headScript.CurrentSize);
     }
 
-    public void StartNewSegment()
-    {
-        CreateNewSegment();
-    }
+    public void StartNewSegment() => CreateNewSegment();
 
     public void ResetTail()
     {

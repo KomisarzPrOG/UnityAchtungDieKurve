@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -152,8 +151,5 @@ public class PlayerSelectManager : MonoBehaviour
             player.rightKeyText.text = KeyNameUtility.ToPretty(player.rightKey);
     }
 
-    public bool IsWaitingForInput()
-    {
-        return waitingForLeftKey || waitingForRightKey;
-    }
+    public bool IsWaitingForInput() => waitingForLeftKey || waitingForRightKey;
 }

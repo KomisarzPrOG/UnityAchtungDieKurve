@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class ColorChaos : PowerUp
 {
     public float duration = 8f;

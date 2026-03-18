@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -202,10 +201,7 @@ public class GameManager : MonoBehaviour
             HELPER METHODS
       ===========================*/
 
-    public List<Head> GetAllPlayers()
-    {
-        return players;
-    }
+    public List<Head> GetAllPlayers() => players;
 
     public Head GetPlayer(int playerId)
     {

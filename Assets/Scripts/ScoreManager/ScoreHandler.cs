@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -152,7 +151,7 @@ public class ScoreHandler : MonoBehaviour
         ===========*/
     public void DebugDump()
     {
-        string output = "==TABELA WYNIKÓW==\n";
+        string output = "==SCOREBOARD==\n";
 
         int i = 1;
         foreach (PlayerScore p in playerScores)
@@ -161,7 +160,7 @@ public class ScoreHandler : MonoBehaviour
 
             if(player != null)
             {
-                output += $"\t{i}. {player.Name}: {p.score} punktów.\n";
+                output += $"\t{i}. {player.Name}: {p.score} points.\n";
                 i++;
             }
         }

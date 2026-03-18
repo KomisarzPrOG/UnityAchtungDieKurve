@@ -18,21 +18,46 @@ MonoBehaviour:
   gapFrequency: 0.05
   gapSize: 5
   powerUpsEnabled: 1
-  speedBoostEnabled: 1
+  speedBoostEnabled: 0
   speedBoostMultiplier: 1.25
   speedBoostDuration: 6
   speedBoostWeight: 60
-  slowDownEnabled: 1
+  slowDownEnabled: 0
   slowDownMultiplier: 0.75
   slowDownDuration: 6
   slowDownWeight: 60
-  growEnabled: 1
+  growEnabled: 0
   growMultiplier: 1.05
   growDuration: 8
   growWeight: 60
-  shrinkEnabled: 1
+  shrinkEnabled: 0
   shrinkMultiplier: 0.95
   shrinkDuration: 8
   shrinkWeight: 60
-  mazeMoveEnabled: 1
+  mazeMoveEnabled: 0
+  mazeMoveDuration: 5
   mazeMoveWeight: 50.348473
+  phaseWalkEnabled: 0
+  phaseWalkDuration: 5
+  phaseWalkWeight: 40
+  playerWrapEnabled: 0
+  playerWrapDuration: 5
+  playerWrapWeight: 50
+  reverseKeyBindsEnabled: 0
+  reverseKeyBindsDuration: 5
+  reverseKeyBindsWeight: 55
+  clearTailsEnabled: 0
+  clearTailsWeight: 30
+  cameraChaosEnabled: 1
+  cameraChaosDuration: 34.26
+  cameraChaosWeight: 20
+  randomPowerUpEnabled: 0
+  randomPowerUpWeight: 45
+  spawnPowerUpsEnabled: 0
+  spawnPowerUpsWeight: 25
+  wrappedBordersEnabled: 0
+  wrappedBordersDuration: 5
+  wrappedBordersWeight: 60
+  colorChaosEnabled: 0
+  colorChaosDuration: 10.850289
+  colorChaosWeight: 54.42049

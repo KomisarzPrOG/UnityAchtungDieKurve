@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class SlowDown : PowerUp
 {
     public float speedMultiplier = 0.75f;

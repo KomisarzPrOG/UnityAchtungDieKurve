@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class SpeedBoost : PowerUp
 {
     public float speedMultiplier = 1.25f;
