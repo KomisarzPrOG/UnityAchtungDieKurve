@@ -188,138 +188,138 @@ public class SettingsMenuController : MonoBehaviour
     void LoadSettingsToUI()
     {
         // Players
-        SetSlider(sliderSpeed, labelSpeed, settings.playerSpeed, 1f, 20f, "Prędkość: {0:F1}");
-        SetSlider(sliderTurnSpeed, labelTurnSpeed, settings.playerTurnSpeed, 30f, 360f, "Skręt: {0:F0}°/s");
-        SetSlider(sliderLineWidth, labelLineWidth, settings.playerLineWidth, 0.05f, 0.5f, "Grubość: {0:F2}");
-        SetSlider(sliderGapFrequency, labelGapFrequency, settings.gapFrequency, 0.01f, 0.3f, "Dziury (częst.): {0:F2}");
-        SetSlider(sliderGapSize, labelGapSize, settings.gapSize, 0.5f, 30f, "Rozmiar dziury: {0:F1}");
+        SetSlider(sliderSpeed, labelSpeed, settings.playerSpeed, 1f, 20f, "Speed: {0:F1}");
+        SetSlider(sliderTurnSpeed, labelTurnSpeed, settings.playerTurnSpeed, 30f, 360f, "Turn: {0:F0}°/s");
+        SetSlider(sliderLineWidth, labelLineWidth, settings.playerLineWidth, 0.05f, 0.5f, "Width: {0:F2}");
+        SetSlider(sliderGapFrequency, labelGapFrequency, settings.gapFrequency, 0.01f, 0.3f, "Gaps (freq.): {0:F2}");
+        SetSlider(sliderGapSize, labelGapSize, settings.gapSize, 0.5f, 30f, "Gaps size: {0:F1}");
 
         // Power-ups
         SetToggle(togglePowerUpsEnabled, settings.powerUpsEnabled);
 
         SetToggle(toggleSpeedBoost, settings.speedBoostEnabled);
-        SetSlider(sliderSpeedBoostMult, labelSpeedBoostMult, settings.speedBoostMultiplier, 1.1f, 5f, "Mnożnik: {0:F2}x");
-        SetSlider(sliderSpeedBoostDur, labelSpeedBoostDur, settings.speedBoostDuration, 1f, 15f, "Czas: {0:F0}s");
-        SetSlider(sliderSpeedBoostWeig, labelSpeedBoostWeig, settings.speedBoostWeight, 0f, 100f, "Waga: {0:F0}");
+        SetSlider(sliderSpeedBoostMult, labelSpeedBoostMult, settings.speedBoostMultiplier, 1.1f, 5f, "Multiplier: {0:F2}x");
+        SetSlider(sliderSpeedBoostDur, labelSpeedBoostDur, settings.speedBoostDuration, 1f, 15f, "Duration: {0:F0}s");
+        SetSlider(sliderSpeedBoostWeig, labelSpeedBoostWeig, settings.speedBoostWeight, 0f, 100f, "Weight: {0:F0}");
 
         SetToggle(toggleSlowDown, settings.slowDownEnabled);
-        SetSlider(sliderSlowDownMult, labelSlowDownMult, settings.slowDownMultiplier, 0.1f, 0.95f, "Mnożnik: {0:F2}x");
-        SetSlider(sliderSlowDownDur, labelSlowDownDur, settings.slowDownDuration, 1f, 15f, "Czas: {0:F0}s");
-        SetSlider(sliderSlowDownWeig, labelSlowDownWeig, settings.slowDownWeight, 0f, 100f, "Waga: {0:F0}");
+        SetSlider(sliderSlowDownMult, labelSlowDownMult, settings.slowDownMultiplier, 0.1f, 0.95f, "Multiplier: {0:F2}x");
+        SetSlider(sliderSlowDownDur, labelSlowDownDur, settings.slowDownDuration, 1f, 15f, "Duration: {0:F0}s");
+        SetSlider(sliderSlowDownWeig, labelSlowDownWeig, settings.slowDownWeight, 0f, 100f, "Weight: {0:F0}");
 
         SetToggle(toggleGrow, settings.growEnabled);
-        SetSlider(sliderGrowMult, labelGrowMult, settings.growMultiplier, 1.15f, 6f, "Mnożnik: {0:F2}x");
-        SetSlider(sliderGrowDur, labelGrowDur, settings.growDuration, 1f, 15f, "Czas: {0:F0}s");
-        SetSlider(sliderGrowWeig, labelGrowWeig, settings.growWeight, 0f, 100f, "Waga: {0:F0}");
+        SetSlider(sliderGrowMult, labelGrowMult, settings.growMultiplier, 1.15f, 6f, "Multiplier: {0:F2}x");
+        SetSlider(sliderGrowDur, labelGrowDur, settings.growDuration, 1f, 15f, "Duration: {0:F0}s");
+        SetSlider(sliderGrowWeig, labelGrowWeig, settings.growWeight, 0f, 100f, "Weight: {0:F0}");
 
         SetToggle(toggleShrink, settings.shrinkEnabled);
-        SetSlider(sliderShrinkMult, labelShrinkMult, settings.shrinkMultiplier, 0.5f, 0.99f, "Mnożnik: {0:F2}x");
-        SetSlider(sliderShrinkDur, labelShrinkDur, settings.shrinkDuration, 1f, 15f, "Czas: {0:F0}s");
-        SetSlider(sliderShrinkWeig, labelShrinkWeig, settings.shrinkWeight, 0f, 100f, "Waga: {0:F0}");
+        SetSlider(sliderShrinkMult, labelShrinkMult, settings.shrinkMultiplier, 0.5f, 0.99f, "Multiplier: {0:F2}x");
+        SetSlider(sliderShrinkDur, labelShrinkDur, settings.shrinkDuration, 1f, 15f, "Duration: {0:F0}s");
+        SetSlider(sliderShrinkWeig, labelShrinkWeig, settings.shrinkWeight, 0f, 100f, "Weight: {0:F0}");
 
         SetToggle(toggleMazeMove, settings.mazeMoveEnabled);
-        SetSlider(sliderMazeMoveDur, labelMazeMoveDur, settings.mazeMoveDuration, 1f, 20f, "Czas: {0:F0}s");
-        SetSlider(sliderMazeMoveWeig, labelMazeMoveWeig, settings.mazeMoveWeight, 0f, 100f, "Waga: {0:F0}");
+        SetSlider(sliderMazeMoveDur, labelMazeMoveDur, settings.mazeMoveDuration, 1f, 20f, "Duration: {0:F0}s");
+        SetSlider(sliderMazeMoveWeig, labelMazeMoveWeig, settings.mazeMoveWeight, 0f, 100f, "Weight: {0:F0}");
 
         SetToggle(togglePhaseWalk, settings.phaseWalkEnabled);
-        SetSlider(sliderPhaseWalkDur, labelPhaseWalkDur, settings.phaseWalkDuration, 1f, 15f, "Czas: {0:F0}s");
-        SetSlider(sliderPhaseWalkWeig, labelPhaseWalkWeig, settings.phaseWalkWeight, 0f, 100f, "Waga: {0:F0}");
+        SetSlider(sliderPhaseWalkDur, labelPhaseWalkDur, settings.phaseWalkDuration, 1f, 15f, "Duration: {0:F0}s");
+        SetSlider(sliderPhaseWalkWeig, labelPhaseWalkWeig, settings.phaseWalkWeight, 0f, 100f, "Weight: {0:F0}");
 
         SetToggle(togglePlayerWrap, settings.playerWrapEnabled);
-        SetSlider(sliderPlayerWrapDur, labelPlayerWrapDur, settings.playerWrapDuration, 1f, 15f, "Czas: {0:F0}s");
-        SetSlider(sliderPlayerWrapWeig, labelPlayerWrapWeig, settings.playerWrapWeight, 0f, 100f, "Waga: {0:F0}");
+        SetSlider(sliderPlayerWrapDur, labelPlayerWrapDur, settings.playerWrapDuration, 1f, 15f, "Duration: {0:F0}s");
+        SetSlider(sliderPlayerWrapWeig, labelPlayerWrapWeig, settings.playerWrapWeight, 0f, 100f, "Weight: {0:F0}");
 
         SetToggle(toggleReverseKeyBinds, settings.reverseKeyBindsEnabled);
-        SetSlider(sliderReverseKeyBindsDur, labelReverseKeyBindsDur, settings.reverseKeyBindsDuration, 1f, 15f, "Czas: {0:F0}s");
-        SetSlider(sliderReverseKeyBindsWeig, labelReverseKeyBindsWeig, settings.reverseKeyBindsWeight, 0f, 100f, "Waga: {0:F0}");
+        SetSlider(sliderReverseKeyBindsDur, labelReverseKeyBindsDur, settings.reverseKeyBindsDuration, 1f, 15f, "Duration: {0:F0}s");
+        SetSlider(sliderReverseKeyBindsWeig, labelReverseKeyBindsWeig, settings.reverseKeyBindsWeight, 0f, 100f, "Weight: {0:F0}");
 
         SetToggle(toggleClearTails, settings.clearTailsEnabled);
-        SetSlider(sliderClearTailsWeig, labelClearTailsWeig, settings.clearTailsWeight, 0f, 100f, "Waga: {0:F0}");
+        SetSlider(sliderClearTailsWeig, labelClearTailsWeig, settings.clearTailsWeight, 0f, 100f, "Weight: {0:F0}");
 
         SetToggle(toggleCameraChaos, settings.cameraChaosEnabled);
-        SetSlider(sliderCameraChaosDur, labelCameraChaosDur, settings.cameraChaosDuration, 1f, 15f, "Czas: {0:F0}s");
-        SetSlider(sliderCameraChaosWeig, labelCameraChaosWeig, settings.cameraChaosWeight, 0f, 100f, "Waga: {0:F0}");
+        SetSlider(sliderCameraChaosDur, labelCameraChaosDur, settings.cameraChaosDuration, 1f, 15f, "Duration: {0:F0}s");
+        SetSlider(sliderCameraChaosWeig, labelCameraChaosWeig, settings.cameraChaosWeight, 0f, 100f, "Weight: {0:F0}");
 
         SetToggle(toggleRandomPowerUp, settings.randomPowerUpEnabled);
-        SetSlider(sliderRandomPowerUpWeig, labelRandomPowerUpWeig, settings.randomPowerUpWeight, 0f, 100f, "Waga: {0:F0}");
+        SetSlider(sliderRandomPowerUpWeig, labelRandomPowerUpWeig, settings.randomPowerUpWeight, 0f, 100f, "Weight: {0:F0}");
 
         SetToggle(toggleSpawnPowerUps, settings.spawnPowerUpsEnabled);
-        SetSlider(sliderSpawnPowerUpsWeig, labelSpawnPowerUpsWeig, settings.spawnPowerUpsWeight, 0f, 100f, "Waga: {0:F0}");
+        SetSlider(sliderSpawnPowerUpsWeig, labelSpawnPowerUpsWeig, settings.spawnPowerUpsWeight, 0f, 100f, "Weight: {0:F0}");
 
         SetToggle(toggleWrappedBorders, settings.wrappedBordersEnabled);
-        SetSlider(sliderWrappedBordersDur, labelWrappedBordersDur, settings.wrappedBordersDuration, 1f, 20f, "Czas: {0:F0}s");
-        SetSlider(sliderWrappedBordersWeig, labelWrappedBordersWeig, settings.wrappedBordersWeight, 0f, 100f, "Waga: {0:F0}");
+        SetSlider(sliderWrappedBordersDur, labelWrappedBordersDur, settings.wrappedBordersDuration, 1f, 20f, "Duration: {0:F0}s");
+        SetSlider(sliderWrappedBordersWeig, labelWrappedBordersWeig, settings.wrappedBordersWeight, 0f, 100f, "Weight: {0:F0}");
 
         SetToggle(toggleColorChaos, settings.colorChaosEnabled);
-        SetSlider(sliderColorChaosDur, labelColorChaosDur, settings.colorChaosDuration, 2f, 20f, "Czas: {0:F0}s");
-        SetSlider(sliderColorChaosWeig, labelColorChaosWeig, settings.colorChaosWeight, 0f, 100f, "Waga: {0:F0}");
+        SetSlider(sliderColorChaosDur, labelColorChaosDur, settings.colorChaosDuration, 2f, 20f, "Duration: {0:F0}s");
+        SetSlider(sliderColorChaosWeig, labelColorChaosWeig, settings.colorChaosWeight, 0f, 100f, "Weight: {0:F0}");
     }
 
     void RegisterSliderListeners()
     {
         // Players
-        AddSliderListener(sliderSpeed, labelSpeed, "Prędkość: {0:F1}", v => settings.playerSpeed = v);
-        AddSliderListener(sliderTurnSpeed, labelTurnSpeed, "Skręt: {0:F0}°/s", v => settings.playerTurnSpeed = v);
-        AddSliderListener(sliderLineWidth, labelLineWidth, "Grubość: {0:F2}", v => settings.playerLineWidth = v);
-        AddSliderListener(sliderGapFrequency, labelGapFrequency, "Dziury (częst.): {0:F2}", v => settings.gapFrequency = v);
-        AddSliderListener(sliderGapSize, labelGapSize, "Rozmiar dziury: {0:F1}", v => settings.gapSize = v);
+        AddSliderListener(sliderSpeed, labelSpeed, "Speed: {0:F1}", v => settings.playerSpeed = v);
+        AddSliderListener(sliderTurnSpeed, labelTurnSpeed, "Turn: {0:F0}°/s", v => settings.playerTurnSpeed = v);
+        AddSliderListener(sliderLineWidth, labelLineWidth, "Width: {0:F2}", v => settings.playerLineWidth = v);
+        AddSliderListener(sliderGapFrequency, labelGapFrequency, "Gaps (freq.): {0:F2}", v => settings.gapFrequency = v);
+        AddSliderListener(sliderGapSize, labelGapSize, "Gaps size: {0:F1}", v => settings.gapSize = v);
 
         // Speed Boost
-        AddSliderListener(sliderSpeedBoostMult, labelSpeedBoostMult, "Mnożnik: {0:F2}x", v => settings.speedBoostMultiplier = v);
-        AddSliderListener(sliderSpeedBoostDur, labelSpeedBoostDur, "Czas: {0:F0}s", v => settings.speedBoostDuration = v);
-        AddSliderListener(sliderSpeedBoostWeig, labelSpeedBoostWeig, "Waga: {0:F0}", v => settings.speedBoostWeight = v);
+        AddSliderListener(sliderSpeedBoostMult, labelSpeedBoostMult, "Multiplier: {0:F2}x", v => settings.speedBoostMultiplier = v);
+        AddSliderListener(sliderSpeedBoostDur, labelSpeedBoostDur, "Duration: {0:F0}s", v => settings.speedBoostDuration = v);
+        AddSliderListener(sliderSpeedBoostWeig, labelSpeedBoostWeig, "Weight: {0:F0}", v => settings.speedBoostWeight = v);
 
         // Slow Down
-        AddSliderListener(sliderSlowDownMult, labelSlowDownMult, "Mnożnik: {0:F2}x", v => settings.slowDownMultiplier = v);
-        AddSliderListener(sliderSlowDownDur, labelSlowDownDur, "Czas: {0:F0}s", v => settings.slowDownDuration = v);
-        AddSliderListener(sliderSlowDownWeig, labelSlowDownWeig, "Waga: {0:F0}", v => settings.slowDownWeight = v);
+        AddSliderListener(sliderSlowDownMult, labelSlowDownMult, "Multiplier: {0:F2}x", v => settings.slowDownMultiplier = v);
+        AddSliderListener(sliderSlowDownDur, labelSlowDownDur, "Duration: {0:F0}s", v => settings.slowDownDuration = v);
+        AddSliderListener(sliderSlowDownWeig, labelSlowDownWeig, "Weight: {0:F0}", v => settings.slowDownWeight = v);
 
         // Grow
-        AddSliderListener(sliderGrowMult, labelGrowMult, "Mnożnik: {0:F2}x", v => settings.growMultiplier = v);
-        AddSliderListener(sliderGrowDur, labelGrowDur, "Czas: {0:F0}s", v => settings.growDuration = v);
-        AddSliderListener(sliderGrowWeig, labelGrowWeig, "Waga: {0:F0}", v => settings.growWeight= v);
+        AddSliderListener(sliderGrowMult, labelGrowMult, "Multiplier: {0:F2}x", v => settings.growMultiplier = v);
+        AddSliderListener(sliderGrowDur, labelGrowDur, "Duration: {0:F0}s", v => settings.growDuration = v);
+        AddSliderListener(sliderGrowWeig, labelGrowWeig, "Weight: {0:F0}", v => settings.growWeight= v);
 
         // Shrink
-        AddSliderListener(sliderShrinkMult, labelShrinkMult, "Mnożnik: {0:F2}x", v => settings.shrinkMultiplier = v);
-        AddSliderListener(sliderShrinkDur, labelShrinkDur, "Czas: {0:F0}s", v => settings.shrinkDuration = v);
-        AddSliderListener(sliderShrinkWeig, labelShrinkWeig, "Waga: {0:F0}", v => settings.shrinkWeight = v);
+        AddSliderListener(sliderShrinkMult, labelShrinkMult, "Multiplier: {0:F2}x", v => settings.shrinkMultiplier = v);
+        AddSliderListener(sliderShrinkDur, labelShrinkDur, "Duration: {0:F0}s", v => settings.shrinkDuration = v);
+        AddSliderListener(sliderShrinkWeig, labelShrinkWeig, "Weight: {0:F0}", v => settings.shrinkWeight = v);
 
         // Maze Move
-        AddSliderListener(sliderMazeMoveDur, labelMazeMoveDur, "Czas: {0:F0}s", v => settings.mazeMoveDuration = v);
-        AddSliderListener(sliderMazeMoveWeig, labelMazeMoveWeig, "Waga: {0:F0}", v => settings.mazeMoveWeight = v);
+        AddSliderListener(sliderMazeMoveDur, labelMazeMoveDur, "Duration: {0:F0}s", v => settings.mazeMoveDuration = v);
+        AddSliderListener(sliderMazeMoveWeig, labelMazeMoveWeig, "Weight: {0:F0}", v => settings.mazeMoveWeight = v);
 
         // Phase Walk
-        AddSliderListener(sliderPhaseWalkDur, labelPhaseWalkDur, "Czas: {0:F0}s", v => settings.phaseWalkDuration = v);
-        AddSliderListener(sliderPhaseWalkWeig, labelPhaseWalkWeig, "Waga: {0:F0}", v => settings.phaseWalkWeight = v);
+        AddSliderListener(sliderPhaseWalkDur, labelPhaseWalkDur, "Duration: {0:F0}s", v => settings.phaseWalkDuration = v);
+        AddSliderListener(sliderPhaseWalkWeig, labelPhaseWalkWeig, "Weight: {0:F0}", v => settings.phaseWalkWeight = v);
 
         // Player Wrap
-        AddSliderListener(sliderPlayerWrapDur, labelPlayerWrapDur, "Czas: {0:F0}s", v => settings.playerWrapDuration = v);
-        AddSliderListener(sliderPlayerWrapWeig, labelPlayerWrapWeig, "Waga: {0:F0}", v => settings.playerWrapWeight = v);
+        AddSliderListener(sliderPlayerWrapDur, labelPlayerWrapDur, "Duration: {0:F0}s", v => settings.playerWrapDuration = v);
+        AddSliderListener(sliderPlayerWrapWeig, labelPlayerWrapWeig, "Weight: {0:F0}", v => settings.playerWrapWeight = v);
 
         // Reverse KeyBinds
-        AddSliderListener(sliderReverseKeyBindsDur, labelReverseKeyBindsDur, "Czas: {0:F0}s", v => settings.reverseKeyBindsDuration = v);
-        AddSliderListener(sliderReverseKeyBindsWeig, labelReverseKeyBindsWeig, "Waga: {0:F0}", v => settings.reverseKeyBindsWeight = v);
+        AddSliderListener(sliderReverseKeyBindsDur, labelReverseKeyBindsDur, "Duration: {0:F0}s", v => settings.reverseKeyBindsDuration = v);
+        AddSliderListener(sliderReverseKeyBindsWeig, labelReverseKeyBindsWeig, "Weight: {0:F0}", v => settings.reverseKeyBindsWeight = v);
 
         // Clear Tails
-        AddSliderListener(sliderClearTailsWeig, labelClearTailsWeig, "Waga: {0:F0}", v => settings.clearTailsWeight = v);
+        AddSliderListener(sliderClearTailsWeig, labelClearTailsWeig, "Weight: {0:F0}", v => settings.clearTailsWeight = v);
 
         // Camera Chaos
-        AddSliderListener(sliderCameraChaosDur, labelCameraChaosDur, "Czas: {0:F0}s", v => settings.cameraChaosDuration = v);
-        AddSliderListener(sliderCameraChaosWeig, labelCameraChaosWeig, "Waga: {0:F0}", v => settings.cameraChaosWeight = v);
+        AddSliderListener(sliderCameraChaosDur, labelCameraChaosDur, "Duration: {0:F0}s", v => settings.cameraChaosDuration = v);
+        AddSliderListener(sliderCameraChaosWeig, labelCameraChaosWeig, "Weight: {0:F0}", v => settings.cameraChaosWeight = v);
 
         // Random Power-up
-        AddSliderListener(sliderRandomPowerUpWeig, labelRandomPowerUpWeig, "Waga: {0:F0}", v => settings.randomPowerUpWeight = v);
+        AddSliderListener(sliderRandomPowerUpWeig, labelRandomPowerUpWeig, "Weight: {0:F0}", v => settings.randomPowerUpWeight = v);
 
         // Spawn Power-ups
-        AddSliderListener(sliderSpawnPowerUpsWeig, labelSpawnPowerUpsWeig, "Waga: {0:F0}", v => settings.spawnPowerUpsWeight = v);
+        AddSliderListener(sliderSpawnPowerUpsWeig, labelSpawnPowerUpsWeig, "Weight: {0:F0}", v => settings.spawnPowerUpsWeight = v);
 
         // Wrapped Borders
-        AddSliderListener(sliderWrappedBordersDur, labelWrappedBordersDur, "Czas: {0:F0}s", v => settings.wrappedBordersDuration = v);
-        AddSliderListener(sliderWrappedBordersWeig, labelWrappedBordersWeig, "Waga: {0:F0}", v => settings.wrappedBordersWeight = v);
+        AddSliderListener(sliderWrappedBordersDur, labelWrappedBordersDur, "Duration: {0:F0}s", v => settings.wrappedBordersDuration = v);
+        AddSliderListener(sliderWrappedBordersWeig, labelWrappedBordersWeig, "Weight: {0:F0}", v => settings.wrappedBordersWeight = v);
 
         // Color Chaos
-        AddSliderListener(sliderColorChaosDur, labelColorChaosDur, "Czas: {0:F0}s", v => settings.colorChaosDuration = v);
-        AddSliderListener(sliderColorChaosWeig, labelColorChaosWeig, "Waga: {0:F0}", v => settings.colorChaosWeight = v);
+        AddSliderListener(sliderColorChaosDur, labelColorChaosDur, "Duration: {0:F0}s", v => settings.colorChaosDuration = v);
+        AddSliderListener(sliderColorChaosWeig, labelColorChaosWeig, "Weight: {0:F0}", v => settings.colorChaosWeight = v);
     }
 
     void RegisterToggleListeners()
